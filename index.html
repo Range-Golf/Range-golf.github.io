@@ -1,0 +1,1696 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Range Golf: skills tests for putting, wedges, irons and driver, then a voice-coached 4-week practice plan built around your weakest areas.">
+<meta name="theme-color" content="#0F3A28">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Range Golf">
+<meta property="og:title" content="Range Golf: practise with a plan">
+<meta property="og:description" content="Test your putting, wedges, irons and driver, then follow a voice-coached practice plan built around your weakest areas. Free, and your results stay private on your device.">
+<meta property="og:url" content="https://range-golf.github.io/">
+<meta property="og:image" content="https://range-golf.github.io/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Range Golf logo with the line Practise with a plan">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Range Golf">
+<style>:root{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}img{max-width:100%}</style>
+<title>Range Golf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Brand: Range Golf, sibling of Range. Same goniometer mark with a ball on the arc, in fairway green; amber for "set up", slate blue for "fair".
+   Layout: phone-width app shell. Four tabbed screens (Today, Plan, Library, Progress) over a fixed bottom tab bar; the skills test and the session player open full screen. */
+:root{
+  --bg:#EFF3EE; --card:#FBFCFA; --ink:#14201A; --muted:#55645B; --line:#D2DCD4; --far:#A7B4AB;
+  --accent:#1D6B45; --accent-ink:#FFFFFF; --accent-soft:#DCEDE2;
+  --brand:#0F3A28; --brand-ink:#FFFFFF; --brand-soft:#B9D9C5; --brand-arc:#7FCB98; --brand-far:#CFE8D8; --logo-arc:#1D6B45;
+  --band:#A86C00; --band-soft:#F5E5C0; --mid:#2F5DB0; --done:#1D6B45; --done-soft:#DCEDE2; --warn:#B03A2E;
+  --scrim:rgba(10,24,16,.5); --shadow:rgba(20,32,26,.12);
+  --f-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C1410; --card:#131E18; --ink:#E3ECE6; --muted:#98A89E; --line:#26342C; --far:#4D5E54;
+    --accent:#5CC48A; --accent-ink:#0C1410; --accent-soft:#16301F;
+    --brand:#123F2B; --brand-ink:#FFFFFF; --brand-soft:#B9D9C5; --brand-arc:#7FCB98; --brand-far:#CFE8D8; --logo-arc:#5CC48A;
+    --band:#F0B13A; --band-soft:#3A2C10; --mid:#86A8F0; --done:#5CC48A; --done-soft:#16301F; --warn:#F0806C;
+    --scrim:rgba(0,0,0,.62); --shadow:rgba(0,0,0,.35); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C1410; --card:#131E18; --ink:#E3ECE6; --muted:#98A89E; --line:#26342C; --far:#4D5E54;
+  --accent:#5CC48A; --accent-ink:#0C1410; --accent-soft:#16301F;
+  --brand:#123F2B; --brand-ink:#FFFFFF; --brand-soft:#B9D9C5; --brand-arc:#7FCB98; --brand-far:#CFE8D8; --logo-arc:#5CC48A;
+  --band:#F0B13A; --band-soft:#3A2C10; --mid:#86A8F0; --done:#5CC48A; --done-soft:#16301F; --warn:#F0806C;
+  --scrim:rgba(0,0,0,.62); --shadow:rgba(0,0,0,.35); color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--f-body);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit}
+button:disabled{opacity:.45;cursor:not-allowed}
+a{color:var(--accent)}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
+h1,h2,h3{text-wrap:balance}
+.mono{font-family:var(--f-mono);font-size:12.5px}
+
+.app{max-width:560px;margin:0 auto;padding-inline:16px;padding-block:16px calc(92px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:22px}
+.screen{display:flex;flex-direction:column;gap:22px}
+
+/* Brand bar */
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:-6px}
+.lockup{display:flex;align-items:center;gap:10px;color:var(--ink)}
+.lockup .mark{width:36px;height:36px;display:block;flex:none}
+.lockup .wordmark{height:19px;width:auto;display:block}
+.golf-tag{font-family:var(--f-display);font-weight:800;font-size:15px;letter-spacing:.14em;color:var(--accent);padding:1px 7px;border:1.5px solid var(--accent);border-radius:6px;line-height:1.25}
+.who{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;min-width:0}
+.who span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:14ch}
+.avatar{width:26px;height:26px;border-radius:50%;flex:none;object-fit:cover;background:var(--line)}
+
+/* Screen header */
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.eyebrow,.kicker{margin:0;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.top h1{margin:2px 0 0;font-family:var(--f-display);font-weight:800;font-size:60px;line-height:.85;text-transform:uppercase;letter-spacing:.01em}
+.stat{text-align:right;flex:none}
+.stat b{display:block;font-family:var(--f-display);font-weight:800;font-size:36px;line-height:.9;font-variant-numeric:tabular-nums}
+.stat span{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.streak{flex:none;display:inline-flex;align-items:center;gap:6px;padding:6px 12px 6px 9px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:14px}
+.streak svg{width:17px;height:17px}
+.streak b{font-family:var(--f-display);font-size:20px;line-height:1}
+.lede{margin:-8px 0 0;color:var(--muted);max-width:52ch}
+
+/* Cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 16px}
+.h2{margin:4px 0 0;font-family:var(--f-display);font-weight:800;font-size:36px;line-height:.95;text-transform:uppercase}
+.h3{margin:0;font-family:var(--f-display);font-weight:800;font-size:24px;line-height:1;text-transform:uppercase;letter-spacing:.02em}
+.block{display:flex;flex-direction:column;gap:10px}
+.sub2{margin:-4px 0 0;color:var(--muted);font-size:15px}
+.fine{margin:0;font-size:13.5px;color:var(--muted)}
+.note{margin:0;font-size:13.5px;color:var(--muted);max-width:60ch}
+.warn-note{margin:0;padding:10px 12px;border-radius:12px;background:var(--band-soft);color:var(--ink);font-size:14.5px}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px}
+
+.hero{background:var(--brand);color:var(--brand-ink);border-color:transparent;display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:8px;align-items:center}
+.hero p{margin:6px 0 0}
+.hero .h2{font-size:34px}
+.hero .cta{margin-top:14px;background:var(--brand-ink);color:var(--brand)}
+.hero .kicker,.hero .fine{color:var(--brand-soft)}
+.hero .fine{margin-top:8px}
+.hero-fig{width:100%;height:auto;align-self:end}
+
+.score-card{display:flex;align-items:center;gap:16px}
+.ringbox{position:relative;flex:none;width:92px;aspect-ratio:1;border:0;padding:0;background:none;cursor:pointer;border-radius:50%}
+.ringbox svg{width:100%;height:100%;display:block;transform:rotate(-90deg)}
+.sr-bg{fill:none;stroke:var(--line);stroke-width:9}
+.sr-fg{fill:none;stroke:var(--accent);stroke-width:9;stroke-linecap:round}
+.sr-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.sr-num b{font-family:var(--f-display);font-weight:800;font-size:38px;line-height:.85;font-variant-numeric:tabular-nums}
+.sr-num small{font-family:var(--f-mono);font-size:10.5px;color:var(--muted)}
+.sc-txt{min-width:0;display:flex;flex-direction:column;gap:4px}
+.sc-txt p{margin:0}
+.ringbox.lg{width:132px}
+.ringbox.lg .sr-num b{font-size:56px}
+.ringbox.xl{width:min(170px,48vw)}
+.ringbox.xl .sr-num b{font-size:72px}
+
+.sess-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.badge{font-size:12px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--done-soft);color:var(--done)}
+.focus{margin:10px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:14px;color:var(--muted)}
+.focus b{color:var(--ink);background:var(--band-soft);padding:2px 9px;border-radius:99px;font-size:13.5px}
+.focus b.other{background:var(--bg)}
+.opt-group{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.len-l{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;padding:3px;border-radius:12px;background:var(--bg)}
+.seg.s2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.seg.s3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.seg button{border:0;background:none;border-radius:9px;padding:8px 0;font-weight:700;font-size:14.5px;color:var(--muted);cursor:pointer;font-variant-numeric:tabular-nums}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px var(--shadow)}
+.meta{margin:12px 0 0;color:var(--muted)}
+.ex-list{list-style:none;margin:8px 0 16px;padding:0}
+.ex-list.lib{margin:0}
+.ex-row{display:grid;grid-template-columns:68px minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;padding:9px 0;border:0;border-top:1px solid var(--line);background:none;text-align:left;cursor:pointer}
+.ex-list.lib li:first-child .ex-row{border-top:0}
+.ex-row .thumb{width:68px;height:44px;border-radius:8px;background:var(--bg);display:block;overflow:hidden}
+.lib .ex-row .thumb{background:var(--card)}
+.ex-row .thumb svg{width:100%;height:100%;display:block}
+.ex-row .nm{display:block;font-weight:700;font-size:15.5px;line-height:1.25}
+.ex-row .ds{display:block;font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-top:2px}
+.ex-row .chev{color:var(--muted);width:18px;height:18px}
+.cta{width:100%;border:0;border-radius:14px;background:var(--accent);color:var(--accent-ink);font-family:var(--f-display);font-weight:800;font-size:24px;letter-spacing:.06em;text-transform:uppercase;padding:13px 16px;cursor:pointer;display:flex;justify-content:center;align-items:center;gap:10px}
+.cta svg{width:20px;height:20px}
+.link-btn{background:none;border:0;padding:4px 0;color:var(--accent);font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.under{display:flex;justify-content:center;margin-top:10px}
+.done-note{margin:0;display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;background:var(--done-soft);color:var(--done);font-weight:700;font-size:14.5px}
+.done-note svg{width:18px;height:18px;flex:none}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:99px;padding:6px 12px;font-weight:700;font-size:14px;cursor:pointer}
+.card .chip{background:var(--bg)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.tile{border:1px solid var(--line);background:var(--card);border-radius:16px;padding:12px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;cursor:pointer;min-width:0}
+.tl-name{font-family:var(--f-display);font-weight:800;font-size:24px;line-height:1;text-transform:uppercase;margin-top:2px}
+.tl-meta{color:var(--muted)}
+.tl-figs{display:flex;gap:4px;margin-top:8px;width:100%}
+.tl-figs svg{flex:1;min-width:0;height:32px;background:var(--bg);border-radius:6px}
+.area-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.area-tile{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:11px 12px;display:flex;flex-direction:column;gap:7px;text-align:left;cursor:pointer;min-width:0}
+.at-name{font-weight:700;font-size:15.5px;line-height:1.2}
+.at-meta{color:var(--muted)}
+
+.track{position:relative;display:block;height:8px;border-radius:99px;background:var(--line)}
+.fill{display:block;height:100%;border-radius:inherit;background:var(--c,var(--accent))}
+.ghost{position:absolute;top:-4px;bottom:-4px;width:2.5px;border-radius:2px;background:var(--ink);opacity:.55}
+.bars{display:flex;flex-direction:column;gap:12px}
+.abar{display:grid;grid-template-columns:6.4em minmax(0,1fr) 5.6em;align-items:center;gap:10px}
+.abar .an{font-weight:700;font-size:14.5px}
+.abar .av{font-size:13px;font-weight:700;text-align:right;color:var(--c)}
+.abar .av.none{color:var(--muted);font-weight:400}
+.bars .track{height:10px}
+.legend{margin:2px 0 0;display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.legend i{width:2.5px;height:14px;border-radius:2px;background:var(--ink);opacity:.55}
+
+.score-big{display:flex;align-items:center;gap:18px}
+.delta{margin:0;font-family:var(--f-display);font-weight:800;font-size:26px;line-height:1;color:var(--done)}
+.delta.neg{color:var(--band)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.stats div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.stats b{display:block;font-family:var(--f-display);font-weight:800;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.stats span{font-size:12px;color:var(--muted)}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;max-width:360px}
+.cal-h{text-align:center;font-size:11px;font-weight:700;color:var(--muted)}
+.cal-d{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-size:11.5px;background:var(--line);color:var(--muted);max-width:100%}
+.cal-d.on{background:var(--done);color:var(--card)}
+.cal-d.fut{background:transparent;border:1.5px dashed var(--line);color:transparent}
+.cal-d.today{box-shadow:0 0 0 2px var(--accent)}
+.hist{list-style:none;margin:0;padding:0}
+.hist li{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:9px 0;border-top:1px solid var(--line)}
+.hist li:first-child{border-top:0}
+.hist b{font-family:var(--f-display);font-weight:800;font-size:24px;line-height:1;font-variant-numeric:tabular-nums}
+.confirm{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:14px}
+.btn{appearance:none;border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;color:var(--ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.danger{border-color:var(--warn);color:var(--warn)}
+.btn svg{width:16px;height:16px;flex:none}
+.vsum{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.vsum p{margin:0}
+
+/* Tutorial videos */
+.yt-wrap{flex:none;position:relative;width:100%;aspect-ratio:16/9;max-width:100%;border-radius:14px;overflow:hidden;background:#000}
+.yt-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-cap{margin:0;font-size:13px;color:var(--muted)}
+.yt-cap a{font-weight:700}
+
+/* Adaptation and coach */
+.adapt{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.adapt li{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;color:var(--muted)}
+.adapt li svg{width:15px;height:15px;flex:none;margin-top:3px;color:var(--accent)}
+.checkin{display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.checkin .ck-q{margin:6px 0 0;font-weight:700}
+.checkin .chip{background:var(--bg)}
+.checkin .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.checkin .seg{background:var(--bg)}
+.checkin .seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.ck-note{margin:4px 0 0;font-size:14px;color:var(--muted)}
+.coach{display:flex;flex-direction:column;gap:10px}
+.coach .c-sum{margin:0;font-size:15.5px}
+.coach ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:14.5px}
+.coach .c-applied{margin:0;font-size:13px;color:var(--muted)}
+.coach .c-busy{margin:0;font-size:15px;color:var(--muted)}
+.coach-badge{margin:0;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.coach-badge svg{width:16px;height:16px}
+
+/* Plan grid */
+.weeks{display:flex;flex-direction:column;gap:16px}
+.week-head{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.week-head .wk{font-family:var(--f-display);font-weight:800;font-size:19px;letter-spacing:.05em;text-transform:uppercase}
+.week-head .wn{color:var(--muted);font-size:14.5px}
+.days{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.day{appearance:none;position:relative;min-width:0;border:1.5px solid var(--line);background:var(--card);border-radius:10px;padding:8px 6px 7px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;overflow:hidden}
+.day .dn{font-family:var(--f-display);font-weight:800;font-size:23px;line-height:1;font-variant-numeric:tabular-nums}
+.day .dt{font-size:11.5px;line-height:1.1;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.day.done{background:var(--done-soft);border-color:transparent}
+.day.done .dt{color:var(--done);font-weight:700}
+.day.next:not(.sel)::after{content:"";position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.day.sel{border-color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.day.sel .dn{color:var(--accent)}
+
+/* Golfer figures */
+.fig line,.fig path{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:5}
+.fig .near{stroke:var(--ink)}
+.fig .hl.near{stroke:var(--accent)}
+.fig .arm{stroke-width:4.2}
+.fig .head{fill:var(--ink)}
+.fig .head.hl{fill:var(--accent)}
+.fig .gnd{stroke:var(--line);stroke-width:2.5}
+.fig .shaft{stroke:var(--ink);stroke-width:2.4}
+.fig .shaft.hl,.fig .chead.hl{stroke:var(--accent)}
+.fig .chead{stroke:var(--ink);stroke-width:4.5}
+.fig .chead.driver{stroke-width:7}
+.fig .chead.putter{stroke-width:3.2}
+.fig .ball{fill:var(--card);stroke:var(--ink);stroke-width:1.4}
+.fig .tee{stroke:var(--muted);stroke-width:2}
+.fig .holeC{fill:var(--ink)}
+.fig .pole{stroke:var(--muted);stroke-width:2}
+.fig .flagC{fill:var(--band)}
+.fig .stick{stroke:var(--band);stroke-width:3}
+.fig .towel{fill:var(--band-soft);stroke:var(--band);stroke-width:1.2}
+.fig .sand{fill:var(--band-soft)}
+.fig .mark{fill:var(--band)}
+.fig.thumb line,.fig.thumb path{stroke-width:7}
+.fig.thumb .arm{stroke-width:6}
+.fig.thumb .shaft{stroke-width:3.4}
+.fig.thumb .chead{stroke-width:6}
+.fig.thumb .gnd{stroke-width:3}
+.fig.thumb .tee,.fig.thumb .pole{stroke-width:3}
+.hero .fig .near{stroke:var(--brand-ink)}
+.hero .fig .hl.near,.hero .fig .shaft.hl,.hero .fig .chead.hl{stroke:var(--brand-arc)}
+.hero .fig .head{fill:var(--brand-ink)}
+.hero .fig .shaft,.hero .fig .chead{stroke:var(--brand-ink)}
+.hero .fig .ball{fill:var(--brand-ink);stroke:none}
+.hero .fig .gnd{stroke:var(--brand-far);opacity:.35}
+.hero .fig .tee{stroke:var(--brand-soft)}
+
+/* Tab bar */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabbar .in{max-width:560px;margin:0 auto;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
+.tab{border:0;background:none;padding:9px 0 8px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11.5px;font-weight:700;color:var(--muted);cursor:pointer}
+.tab svg{width:23px;height:23px}
+.tab[aria-current="page"]{color:var(--accent)}
+
+/* Sheets */
+.sheet-back{position:fixed;inset:0;z-index:40;background:var(--scrim);display:flex;align-items:flex-end;justify-content:center}
+#sheet{z-index:45}
+#voiceSheet{z-index:46}
+.sheet{width:100%;max-width:560px;max-height:90%;overflow-y:auto;background:var(--card);border-radius:22px 22px 0 0;padding:10px 16px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px}
+.sheet-bar{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.sheet h3{margin:2px 0 0;font-family:var(--f-display);font-weight:800;font-size:34px;line-height:.95;text-transform:uppercase}
+.sh-fig{background:var(--bg);border-radius:14px;padding:6px}
+.sh-fig svg{width:100%;height:auto;display:block;max-height:240px}
+.hl-note{margin:0;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.hl-note i{width:18px;height:5px;border-radius:3px;background:var(--accent);flex:none}
+.sh-actions{display:flex;flex-wrap:wrap;gap:8px}
+.steps{margin:4px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:8px}
+.steps li{padding-left:4px}
+.steps li::marker{font-family:var(--f-display);font-weight:800;color:var(--accent)}
+.cue-box{margin:0;padding:10px 12px;border-radius:12px;background:var(--accent-soft);font-size:15px}
+.kit{margin:0;font-size:14px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:12.5px;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--bg);color:var(--muted)}
+#ssList{margin:0}
+.vs-row{display:flex;flex-direction:column;gap:6px}
+.voices{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.voices li+li{border-top:1px solid var(--line)}
+.vrow{width:100%;border:0;background:none;display:grid;grid-template-columns:minmax(0,1fr) auto 22px;gap:10px;align-items:center;padding:11px 12px;text-align:left;cursor:pointer}
+.vrow .vn{font-weight:700;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vrow .va{font-size:12.5px;color:var(--muted)}
+.vrow svg{width:18px;height:18px;color:var(--muted)}
+.vrow[aria-pressed="true"]{background:var(--accent-soft)}
+.vrow[aria-pressed="true"] .vn,.vrow[aria-pressed="true"] svg{color:var(--accent)}
+
+/* Full-screen overlays */
+.player{position:fixed;inset:0;z-index:30;background:var(--bg);overflow-y:auto;padding-top:calc(env(safe-area-inset-top,0px) + 10px);padding-bottom:calc(env(safe-area-inset-bottom,0px) + 16px)}
+.player{--phase:var(--band)}
+.player[data-phase="work"]{--phase:var(--accent)}
+.pl-wrap{max-width:560px;margin:0 auto;padding-inline:16px;display:flex;flex-direction:column;gap:12px}
+.pl-top{display:flex;align-items:center;gap:8px}
+.icon-btn{flex:none;width:44px;height:44px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer;padding:0}
+.icon-btn svg{width:20px;height:20px}
+.icon-btn[aria-pressed="false"]{color:var(--muted);background:transparent;border-style:dashed}
+.pl-prog{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;padding-inline:4px}
+.pl-prog .lbl{font-family:var(--f-mono);font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.segs{display:flex;gap:3px}
+.segs i{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.segs i.on{background:var(--done)}
+.segs i.cur{background:var(--phase)}
+.end-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;background:var(--card);border:1.5px solid var(--line)}
+.end-bar span{flex:1;min-width:10ch;font-weight:700}
+.pl-head{display:flex;flex-direction:column;gap:4px}
+.pl-head h2{margin:0;font-family:var(--f-display);font-weight:800;font-size:34px;line-height:.95;text-transform:uppercase}
+.pl-head h2 button{all:unset;cursor:pointer}
+.pl-fig{height:clamp(140px,26vh,240px);display:flex;justify-content:center}
+.pl-fig svg{height:100%;width:auto;max-width:100%}
+.pl-timer{display:flex;flex-direction:column;align-items:center;gap:8px}
+.ring{position:relative;width:min(178px,48vw);aspect-ratio:1}
+.ring svg{width:100%;height:100%;display:block}
+.ring .tick{stroke:var(--line);stroke-width:1.5;stroke-linecap:round}
+.ring .tick.maj{stroke:var(--muted);stroke-width:2}
+.ring-bg{fill:none;stroke:var(--line);stroke-width:9;opacity:.6}
+.ring-fg{fill:none;stroke:var(--phase);stroke-width:9;stroke-linecap:round;transform:rotate(-90deg);transform-origin:100px 100px}
+.ring-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.ring-num .ph{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--phase)}
+.ring-num .sec{font-family:var(--f-display);font-weight:800;font-size:56px;line-height:.85;font-variant-numeric:tabular-nums}
+.ring-num .unit{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.ready{border:1.5px solid var(--band);background:var(--band-soft);color:var(--band);border-radius:99px;padding:6px 16px;font-weight:700;cursor:pointer}
+.ready.off{visibility:hidden}
+.pl-cue{min-height:5.6em;font-size:16px;line-height:1.45}
+.pl-cue p{margin:0}
+.pl-cue .tgt{display:inline-block;margin-top:6px;font-family:var(--f-mono);font-size:12.5px;color:var(--muted)}
+.mini-steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:15px}
+.mini-steps li::marker{font-family:var(--f-display);font-weight:800;color:var(--band)}
+.pl-controls{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px}
+.ctrl{justify-self:end;width:52px;height:52px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer;padding:0}
+.ctrl+.play+.ctrl{justify-self:start}
+.ctrl svg{width:22px;height:22px}
+.play{width:76px;height:76px;border-radius:50%;border:0;background:var(--ink);color:var(--bg);display:grid;place-items:center;cursor:pointer;padding:0}
+.play svg{width:30px;height:30px}
+.pl-foot{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.pl-next{margin:0;text-align:center;font-size:13.5px;color:var(--muted)}
+.done{display:flex;flex-direction:column;gap:14px;padding-top:6vh}
+.done h2{margin:0;font-family:var(--f-display);font-weight:800;font-size:64px;line-height:.85;text-transform:uppercase;color:var(--done)}
+.done p{margin:0}
+.done .done-meta{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.dn-mark .mark{width:56px;height:56px;display:block}
+.voice-note{margin:0;font-size:13px;color:var(--muted)}
+.t-head h2{margin:2px 0 0;font-family:var(--f-display);font-weight:800;font-size:40px;line-height:.9;text-transform:uppercase}
+.t-fig{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px}
+.t-fig svg{width:100%;height:auto;max-height:180px;display:block}
+.t-q{display:flex;flex-direction:column;gap:8px;padding-top:4px}
+.t-q h3{margin:0;font-family:var(--f-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em}
+.t-q p{margin:0}
+.t-q .ask{font-weight:700}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.opt{border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:11px 12px;display:flex;align-items:baseline;gap:8px;text-align:left;cursor:pointer;min-width:0;font-size:15px}
+.opt b{font-family:var(--f-display);font-weight:800;font-size:20px;line-height:1;color:var(--muted)}
+.opt[aria-checked="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent);background:var(--accent-soft)}
+.opt[aria-checked="true"] b{color:var(--accent)}
+.pick{display:flex;flex-direction:column;gap:8px}
+.pick button{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:12px 14px;cursor:pointer}
+.pick .pn{font-family:var(--f-display);font-weight:800;font-size:24px;text-transform:uppercase;line-height:1}
+.pick .pw{grid-column:1;font-size:13.5px;color:var(--muted)}
+.pick .ps{grid-row:1/3;grid-column:2;text-align:right;font-weight:700;font-size:14px;color:var(--muted)}
+.pick .ps b{display:block;font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1;color:var(--ink)}
+.res-top{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding-block:8px 4px}
+.res p{margin:0}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="brandbar"><span class="lockup" id="lockup"></span><span id="brandTag"></span></header>
+  <section class="screen" id="tab-today" aria-label="Today"></section>
+  <section class="screen" id="tab-plan" aria-label="Plan" hidden></section>
+  <section class="screen" id="tab-library" aria-label="Library" hidden></section>
+  <section class="screen" id="tab-progress" aria-label="Progress" hidden></section>
+</div>
+
+<nav class="tabbar" aria-label="Sections">
+  <div class="in">
+    <button class="tab" type="button" data-tab="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21V3.5l9 3.5-9 3.5"/><ellipse cx="12" cy="20.5" rx="8" ry="1.5"/></svg>Today</button>
+    <button class="tab" type="button" data-tab="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01" stroke-width="2.4"/></svg>Plan</button>
+    <button class="tab" type="button" data-tab="library"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="6" height="6" rx="1.5"/><rect x="3.5" y="14" width="6" height="6" rx="1.5"/><path d="M13 6h7.5M13 9h5M13 16h7.5M13 19h5"/></svg>Drills</button>
+    <button class="tab" type="button" data-tab="progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5h18M6 17v-5M11 17V7M16 17v-7.5M21 4l-4 3.5"/></svg>Progress</button>
+  </div>
+</nav>
+
+<div class="sheet-back" id="sessSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="ssTitle">
+    <div class="sheet-bar"><p class="kicker" id="ssKicker"></p><button class="icon-btn" id="ssClose" type="button" aria-label="Close"></button></div>
+    <h3 id="ssTitle"></h3>
+    <p class="meta mono" id="ssMeta" style="margin:0"></p>
+    <ol class="ex-list" id="ssList"></ol>
+    <button type="button" class="cta" id="ssStart" data-act="start"></button>
+  </div>
+</div>
+
+<div class="sheet-back" id="sheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="shName">
+    <div class="sheet-bar"><p class="kicker" id="shTarget"></p><button class="icon-btn" id="shClose" type="button" aria-label="Close"></button></div>
+    <h3 id="shName"></h3>
+    <div class="tags" id="shTags"></div>
+    <div class="sh-fig"><svg id="shFig" class="fig" viewBox="0 0 260 170" aria-hidden="true"></svg></div>
+    <p class="hl-note"><i></i>Highlighted parts show what the drill works on.</p>
+    <div class="sh-actions">
+      <button class="btn primary" id="shVidBtn" type="button" hidden></button>
+      <a class="btn primary" id="shVidLink" target="_blank" rel="noopener" hidden></a>
+      <button class="btn" id="shTalk" type="button"></button>
+      <button class="btn" id="shTry" type="button" data-act="start"></button>
+    </div>
+    <div class="yt-wrap" id="shVidBox" hidden></div>
+    <p class="yt-cap" id="shVidCap"></p>
+    <ol class="steps" id="shSteps"></ol>
+    <p class="cue-box" id="shCue"></p>
+    <p class="kit" id="shKit"></p>
+  </div>
+</div>
+
+<div class="sheet-back" id="voiceSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="vsTitle">
+    <div class="sheet-bar"><p class="kicker">Settings</p><button class="icon-btn" id="vsClose" type="button" aria-label="Close"></button></div>
+    <h3 id="vsTitle">Voice coach</h3>
+    <div id="vsBody" style="display:flex;flex-direction:column;gap:16px"></div>
+  </div>
+</div>
+
+<div class="player" id="testView" hidden data-phase="work" role="dialog" aria-label="Skills test"></div>
+
+<div class="player" id="player" hidden data-phase="prep" role="dialog" aria-label="Practice session">
+  <div class="pl-wrap">
+    <div class="pl-top">
+      <button class="icon-btn" id="plClose" type="button" aria-label="End session"></button>
+      <div class="pl-prog"><span class="lbl" id="plCount"></span><div class="segs" id="plSegs"></div></div>
+      <button class="icon-btn" id="plVoice" type="button" aria-pressed="true" aria-label="Voice coach settings"></button>
+      <button class="icon-btn" id="plSound" type="button" aria-pressed="true" aria-label="Countdown beeps"></button>
+    </div>
+    <div class="end-bar" id="endBar" hidden>
+      <span>End this session?</span>
+      <button class="btn danger" id="endYes" type="button">End</button>
+      <button class="btn" id="endNo" type="button">Keep going</button>
+    </div>
+    <p class="voice-note" id="voiceNote" hidden>Voice coaching isn't available in this browser, so follow the cues on screen. The beeps still count you in and out.</p>
+    <div id="plLive" class="pl-wrap" style="padding:0">
+      <div class="pl-head">
+        <p class="kicker" id="plTarget"></p>
+        <h2><button id="plName" type="button" aria-label="How to do this drill"></button></h2>
+      </div>
+      <div class="pl-fig"><svg id="plFig" class="fig" viewBox="0 0 260 170" aria-hidden="true"></svg></div>
+      <div class="pl-timer">
+        <div class="ring">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <g id="ticks"></g>
+            <circle class="ring-bg" cx="100" cy="100" r="82"/>
+            <circle class="ring-fg" id="ringFg" cx="100" cy="100" r="82"/>
+          </svg>
+          <div class="ring-num" aria-live="off"><span class="ph" id="plPhase">Set up</span><span class="sec" id="plSec">30</span><span class="unit" id="plUnit">seconds</span></div>
+        </div>
+        <button class="ready" id="plReady" type="button">I'm set up</button>
+      </div>
+      <div class="pl-cue" id="plCue" aria-live="polite"></div>
+      <div class="pl-controls">
+        <button class="ctrl" id="plPrev" type="button" aria-label="Back to the start of this drill"></button>
+        <button class="play" id="plPlay" type="button" aria-label="Pause"></button>
+        <button class="ctrl" id="plNext" type="button" aria-label="Skip to the next drill"></button>
+      </div>
+      <div class="pl-foot">
+        <a class="btn" id="plYT" target="_blank" rel="noopener"></a>
+        <button class="btn" id="plHow" type="button">How to do it</button>
+      </div>
+      <p class="pl-next" id="plNextName"></p>
+    </div>
+    <div id="plDone" class="done" hidden>
+      <div class="dn-mark" id="dnMark"></div>
+      <p class="kicker" id="dnKicker"></p>
+      <h2>Session<br>done</h2>
+      <p class="done-meta" id="dnMeta"></p>
+      <p id="dnNext"></p>
+      <div class="checkin" id="dnCheck" hidden></div>
+      <button class="btn" id="dnRetest" type="button" hidden>Retest my game</button>
+      <button class="cta" id="dnBack" type="button">Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+/*FIG-START*/
+const VBW=260,VBH=170,GROUND=158,CX=128;
+const rad=d=>d*Math.PI/180;
+const f=n=>Math.round(n*10)/10;
+const sm=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
+/* Face-on golfer (right-handed): target is to the right of the screen.
+   Angles are measured from straight down; positive swings towards the golfer's trail side (screen left). */
+const dirA=a=>[-Math.sin(rad(a)),Math.cos(rad(a))];
+const GSET={
+  putter:{W:20,legH:60,torso:33,tilt:0,arm:37,head:"putter",tee:0,dph:0},
+  wedge:{W:24,legH:62,torso:35,tilt:2,arm:41,head:"iron",tee:0,dph:0},
+  iron:{W:32,legH:63,torso:36,tilt:5,arm:43,head:"iron",tee:0,dph:0},
+  feet:{W:9,legH:64,torso:37,tilt:4,arm:43,head:"iron",tee:0,dph:0},
+  step:{W:9,legH:64,torso:37,tilt:4,arm:43,head:"iron",tee:0,dph:0,stride:22},
+  driver:{W:42,legH:64,torso:38,tilt:9,arm:45,head:"driver",tee:7,dph:-14}
+};
+const KA={th:-4,ph:6,tu:0,hp:0,tl:0,hx:0,he:0,st:0};
+const K=o=>Object.assign({},KA,o||{});
+const P_ADDR=K(),P_HALF=K({th:50,ph:95,tu:45,hp:-2,tl:-1}),P_TOP=K({th:125,ph:268,tu:90,hp:-3,tl:-2,hx:-1}),P_TOP2=K({th:125,ph:270,tu:90,hp:-2,tl:-2,hx:-1}),
+  P_DOWN=K({th:55,ph:150,tu:55,hp:6,tl:4,hx:-1}),P_IMP=K({th:-8,ph:4,tu:25,hp:9,tl:6,hx:-2,he:.1}),P_POST=K({th:-60,ph:-95,tu:45,hp:13,tl:4,he:.5}),
+  P_FIN=K({th:-135,ph:-290,tu:90,hp:16,tl:-7,hx:8,he:1});
+const FULL_POSES=[P_ADDR,P_ADDR,P_HALF,P_TOP,P_TOP2,P_DOWN,P_IMP,P_POST,P_FIN,P_FIN];
+const timed=(times,poses)=>times.map((u,i)=>[u,poses[i]]);
+const SWINGS={
+  full:{per:3800,imp:.67,still:.5,flight:"air",keys:timed([0,.14,.32,.48,.55,.62,.67,.74,.86,1],FULL_POSES)},
+  pause:{per:4800,imp:.72,still:.5,flight:"air",keys:timed([0,.12,.28,.42,.62,.68,.72,.78,.88,1],FULL_POSES)},
+  step:{per:4000,imp:.67,still:.5,flight:"air",keys:timed([0,.14,.32,.48,.55,.62,.67,.74,.86,1],FULL_POSES.map((p,i)=>Object.assign({},p,{st:[0,0,.6,1,1,1,1,1,1,1][i]})))},
+  threeq:{per:3500,imp:.66,still:.48,flight:"low",keys:[[0,K()],[.14,K()],[.3,K({th:45,ph:85,tu:40,hp:-2})],[.46,K({th:95,ph:200,tu:75,hp:-2,tl:-1})],[.52,K({th:95,ph:200,tu:75,hp:-2,tl:-1})],[.6,K({th:40,ph:110,tu:45,hp:6,tl:4})],[.66,K({th:-8,ph:4,tu:25,hp:9,tl:6,hx:-2})],[.76,K({th:-55,ph:-90,tu:45,hp:12,tl:3,he:.4})],[.86,K({th:-95,ph:-200,tu:70,hp:13,tl:0,hx:4,he:.6})],[1,K({th:-95,ph:-200,tu:70,hp:13,tl:0,hx:4,he:.6})]]},
+  half:{per:3300,imp:.6,still:.45,flight:"pitch",keys:[[0,K({th:-3,ph:4})],[.15,K({th:-3,ph:4})],[.42,K({th:70,ph:165,tu:55,hp:-1,tl:-1})],[.48,K({th:70,ph:165,tu:55,hp:-1,tl:-1})],[.6,K({th:-6,ph:3,tu:15,hp:5,tl:2})],[.74,K({th:-70,ph:-165,tu:55,hp:8,hx:3,he:.3})],[1,K({th:-70,ph:-165,tu:55,hp:8,hx:3,he:.3})]]},
+  chip:{per:3000,imp:.58,still:.42,flight:"chip",keys:[[0,K({th:-6,ph:2})],[.18,K({th:-6,ph:2})],[.42,K({th:22,ph:26,tu:10})],[.58,K({th:-8,ph:1,tu:5,hp:2})],[.72,K({th:-26,ph:-28,tu:15,hp:3})],[1,K({th:-26,ph:-28,tu:15,hp:3})]]},
+  putt:{per:3000,imp:.62,still:.45,flight:"roll",keys:[[0,K({th:0,ph:0})],[.2,K({th:0,ph:0})],[.45,K({th:13,ph:13,tu:4})],[.62,K({th:0,ph:0})],[.76,K({th:-15,ph:-15,tu:4})],[1,K({th:-15,ph:-15,tu:4})]]},
+  impact:{per:3600,imp:2,still:.75,flight:"none",keys:[[0,K()],[.15,K()],[.42,K({th:50,ph:120,tu:50,hp:-2})],[.5,K({th:50,ph:120,tu:50,hp:-2})],[.7,K({th:-8,ph:4,tu:25,hp:9,tl:6,hx:-2})],[1,K({th:-8,ph:4,tu:25,hp:9,tl:6,hx:-2})]]}
+};
+function poseAt(sw,u){
+  const ks=sw.keys;let i=0;while(i<ks.length-2&&u>ks[i+1][0])i++;
+  const [u0,a]=ks[i],[u1,b]=ks[i+1],k=u1>u0?sm((u-u0)/(u1-u0)):0,o={};
+  for(const key in a)o[key]=a[key]+(b[key]-a[key])*k;
+  return o;
+}
+function gSolve(set,p){
+  const g=GROUND,st=(set.stride||0)*p.st;
+  const Ft=[CX-set.W/2,g],Fl=[CX+set.W/2+st,g];
+  const P=[CX+p.hp+st*.35,g-set.legH];
+  const hw=9*Math.max(.4,Math.abs(Math.cos(rad(p.tu*.5))));
+  const Ht=[P[0]-hw,P[1]+2],Hl=[P[0]+hw,P[1]+2];
+  const tilt=set.tilt+p.tl,td=[-Math.sin(rad(tilt)),-Math.cos(rad(tilt))],pp=[Math.cos(rad(tilt)),-Math.sin(rad(tilt))];
+  const N=[P[0]+td[0]*set.torso,P[1]+td[1]*set.torso],S=[P[0]+td[0]*(set.torso-3),P[1]+td[1]*(set.torso-3)];
+  const sw=Math.max(2.5,14*Math.abs(Math.cos(rad(p.tu))));
+  const St=[S[0]-pp[0]*sw,S[1]-pp[1]*sw],Sl=[S[0]+pp[0]*sw,S[1]+pp[1]*sw];
+  const ht=tilt*.6,H=[N[0]-Math.sin(rad(ht))*13+p.hx,N[1]-Math.cos(rad(ht))*13];
+  const kneeY=g-set.legH*.5;
+  const AnkT=[Ft[0]+p.he*8,g-2-p.he*9],AnkL=[Fl[0],g-2];
+  const Kt=[(AnkT[0]+Ht[0])/2+2+p.he*16,kneeY+p.he*4],Kl=[(AnkL[0]+Hl[0])/2-2,kneeY];
+  const ToeT=[Ft[0]-6+p.he*10,g-1],ToeL=[Fl[0]+6,g-1];
+  const d=dirA(p.th),G=[S[0]+d[0]*set.arm,S[1]+d[1]*set.arm];
+  return {P,N,S,St,Sl,H,Ht,Hl,Kt,Kl,AnkT,AnkL,ToeT,ToeL,G};
+}
+const CLUBC={};
+function clubOf(setKey,swKey){
+  const k=setKey+"|"+swKey;if(CLUBC[k])return CLUBC[k];
+  const set=GSET[setKey],a=SWINGS[swKey].keys[0][1],J=gSolve(set,a),d=dirA(a.ph+set.dph);
+  const ty=GROUND-1-(set.tee?set.tee*.35:0),L=(ty-J.G[1])/d[1],C=[J.G[0]+d[0]*L,ty];
+  const ball=[C[0]+(set.head==="driver"?6:4),GROUND-3.4-set.tee];
+  return CLUBC[k]={L,ball};
+}
+const HOLE_X=226;
+function ballAt(dr,u,base){
+  const a=dr.anim,sw=SWINGS[a.s];
+  if(a.noBall||sw.flight==="none")return null;
+  if(u<sw.imp)return {x:base[0],y:base[1],o:1};
+  const q=(u-sw.imp)/(1-sw.imp),pr=a.props||[];
+  const tx=pr.includes("hole")?HOLE_X:pr.includes("coin")?214:pr.includes("ladder")?204:base[0]+80;
+  if(sw.flight==="air"){const b=a.set==="driver"?1.15:1;return {x:base[0]+q*260*b,y:base[1]-q*150*b+q*q*30,o:Math.max(0,1-q*2.4)};}
+  if(sw.flight==="low")return {x:base[0]+q*260,y:base[1]-q*90+q*q*20,o:Math.max(0,1-q*2.6)};
+  if(sw.flight==="pitch")return {x:base[0]+q*190,y:base[1]-Math.sin(Math.min(q*1.6,1)*Math.PI)*60,o:Math.max(0,1-Math.max(0,q-.45)*3)};
+  if(sw.flight==="chip"){
+    if(q<.3){const r=q/.3;return {x:base[0]+r*44,y:base[1]-Math.sin(r*Math.PI)*16,o:1};}
+    const r=sm((q-.3)/.55),x=base[0]+44+r*(tx-base[0]-44);return {x,y:base[1],o:pr.includes("hole")&&r>=1?0:1};
+  }
+  const r=sm(Math.min(q/.75,1)),x=base[0]+r*(tx-base[0]);
+  return {x,y:base[1],o:pr.includes("hole")&&r>=1?0:1};
+}
+function seg(cls,a,b){return `<line class="${cls}" x1="${f(a[0])}" y1="${f(a[1])}" x2="${f(b[0])}" y2="${f(b[1])}"/>`;}
+function golfMarkup(dr,u,opt){
+  opt=opt||{};
+  const a=dr.anim,sw=SWINGS[a.s],set=GSET[a.set],p=poseAt(sw,u),J=gSolve(set,p),cl=clubOf(a.set,a.s);
+  const hl=new Set(a.hl||[]),c=n=>(hl.has(n)?"hl ":"")+"near",pr=a.props||[];
+  const d=dirA(p.ph+set.dph),C=[J.G[0]+d[0]*cl.L,J.G[1]+d[1]*cl.L],pd=[d[1],-d[0]];
+  const bx=cl.ball[0],by=cl.ball[1],g=GROUND;
+  let s=`<line class="gnd" x1="${opt.wide?-400:6}" y1="${g}" x2="${opt.wide?700:VBW-6}" y2="${g}"/>`;
+  if(pr.includes("sand"))s+=`<path class="sand" d="M60 ${g}Q130 ${g-7} 205 ${g}L205 ${g+8}L60 ${g+8}Z"/>`;
+  if(pr.includes("sticks"))s+=`<line class="stick" x1="36" y1="${g+3}" x2="244" y2="${g+3}"/>`;
+  if(pr.includes("towel"))s+=`<rect class="towel" x="${f(bx-34)}" y="${g-2.5}" width="18" height="3" rx="1"/>`;
+  if(pr.includes("towelland"))s+=`<rect class="towel" x="178" y="${g-2.5}" width="18" height="3" rx="1"/>`;
+  if(pr.includes("coin"))s+=`<ellipse class="mark" cx="214" cy="${g}" rx="4" ry="1.4"/>`;
+  if(pr.includes("ladder"))for(const x of [176,204,232])s+=`<line class="tee" x1="${x}" y1="${g}" x2="${x}" y2="${g-6}"/>`;
+  if(pr.includes("hole"))s+=`<ellipse class="holeC" cx="${HOLE_X}" cy="${g}" rx="5.5" ry="1.7"/><line class="pole" x1="${HOLE_X}" y1="${g}" x2="${HOLE_X}" y2="${g-52}"/><path class="flagC" d="M${HOLE_X} ${g-52}L${HOLE_X+17} ${g-46.5}L${HOLE_X} ${g-41}Z"/>`;
+  if(pr.includes("flag"))s+=`<line class="pole" x1="236" y1="${g}" x2="236" y2="${g-30}"/><path class="flagC" d="M236 ${g-30}L246 ${g-26.5}L236 ${g-23}Z"/>`;
+  if(pr.includes("gate"))s+=seg("tee",[bx+22,g],[bx+22,g-6])+seg("tee",[bx+28,g],[bx+28,g-6]);
+  if(pr.includes("tee2"))s+=seg("tee",[bx+20,g],[bx+20,g-3]);
+  if(set.tee)s+=seg("tee",[bx,g],[bx,by+3]);
+  s+=seg(c("legs"),J.Ht,J.Kt)+seg(c("legs"),J.Kt,J.AnkT)+seg(c("legs"),J.AnkT,J.ToeT);
+  s+=seg(c("legs"),J.Hl,J.Kl)+seg(c("legs"),J.Kl,J.AnkL)+seg(c("legs"),J.AnkL,J.ToeL);
+  s+=seg(c("torso"),J.Ht,J.Hl)+seg(c("torso"),J.P,J.N)+seg(c("torso"),J.St,J.Sl);
+  const vx=J.H[0]-J.N[0],vy=J.H[1]-J.N[1],vl=Math.hypot(vx,vy)||1;
+  s+=seg(c("head"),J.N,[J.H[0]-vx/vl*8,J.H[1]-vy/vl*8]);
+  s+=`<circle class="head${hl.has("head")?" hl":""}" cx="${f(J.H[0])}" cy="${f(J.H[1])}" r="8"/>`;
+  s+=seg(c("arms")+" arm",J.St,J.G)+seg(c("arms")+" arm",J.Sl,J.G);
+  const ch=set.head==="driver"?[3,6.5]:set.head==="putter"?[4.5,4.5]:[2,4.5];
+  s+=seg("shaft"+(hl.has("club")?" hl":""),J.G,C);
+  s+=seg("chead "+set.head+(hl.has("club")?" hl":""),[C[0]-pd[0]*ch[0],C[1]-pd[1]*ch[0]],[C[0]+pd[0]*ch[1],C[1]+pd[1]*ch[1]]);
+  const b=ballAt(dr,u,cl.ball);
+  if(b&&b.o>0)s+=`<circle class="ball" cx="${f(b.x)}" cy="${f(b.y)}" r="3.4"${b.o<1?` opacity="${b.o.toFixed(2)}"`:""}/>`;
+  return s;
+}
+function golfThumb(dr){return `<svg class="fig thumb" viewBox="20 24 220 142" aria-hidden="true">${golfMarkup(dr,SWINGS[dr.anim.s].still,{wide:true})}</svg>`;}
+/*FIG-END*/
+
+
+/* ---------- Logo ---------- */
+let LOGO_N=0;
+function wordmarkSVG(o){o=o||{};const id="rgwm"+(++LOGO_N),ink=o.ink||"currentColor",arc=o.arc||"var(--logo-arc)";
+return `<svg class="wordmark" viewBox="0 0 344 100" role="img" aria-label="Range"><defs><clipPath id="${id}c"><rect x="-6" y="0" width="356" height="100"/></clipPath><mask id="${id}m" maskUnits="userSpaceOnUse" x="-10" y="-10" width="370" height="120"><rect x="-10" y="-10" width="370" height="120" fill="#fff"/><circle cx="108.4" cy="10" r="4.8" fill="#000"/></mask></defs><path d="M80.1 53.6A52 52 0 0 0 136.7 53.6" fill="none" style="stroke:${arc}" stroke-width="13" stroke-linecap="round"/><g clip-path="url(#${id}c)" fill="none" style="stroke:${ink}" stroke-width="20" stroke-miterlimit="8"><path d="M10 104V10H34A18 18 0 0 1 34 46H10M30 46L54 104"/><path d="M79.4 104L108.4 10L137.4 104" stroke-linejoin="round" mask="url(#${id}m)"/><path transform="translate(155.6 0)" d="M10 104V0L50 100V-4"/><path transform="translate(224.6 0)" d="M50 34V28A18 18 0 0 0 32 10H28A18 18 0 0 0 10 28V72A18 18 0 0 0 28 90H32A18 18 0 0 0 50 72V56H34"/><path transform="translate(293.6 0)" d="M50 10H10V90H50M10 50H44"/></g></svg>`;}
+function markSVG(o){o=o||{};const tile=o.tile||"var(--brand)";
+return `<svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Range Golf"><rect width="100" height="100" rx="24" style="fill:${tile}"/><path d="M12 80Q50 66 88 80L88 88Q50 95 12 88Z" style="fill:${o.green||"rgba(255,255,255,.14)"}"/><path d="M25 65Q41 12 61 69" fill="none" style="stroke:${o.arc||"var(--brand-arc)"}" stroke-width="4.6" stroke-linecap="round" stroke-dasharray="0.1 8.6"/><ellipse cx="68" cy="75" rx="6.5" ry="2.2" style="fill:${o.hole||"#06170F"}"/><path d="M68 75V22" style="stroke:${o.pole||"#FFFFFF"}" stroke-width="4" stroke-linecap="round"/><path d="M68 21L87 28.5L68 36Z" style="fill:${o.flag||"#F2B53D"}"/><circle cx="22" cy="71" r="6" style="fill:${o.ball||"#FFFFFF"}"/></svg>`;}
+
+/* ---------- Golf data ---------- */
+const AREAS=[
+  {id:"putt",name:"Putting",short:"Putt",where:"green"},
+  {id:"wedge",name:"Wedges",short:"Wedge",where:"short"},
+  {id:"iron",name:"Irons",short:"Irons",where:"range"},
+  {id:"driver",name:"Driver",short:"Driver",where:"range"}
+];
+const AREA_IDX={};AREAS.forEach((a,i)=>AREA_IDX[a.id]=i);
+const areaName=id=>AREAS[AREA_IDX[id]].name;
+const areaShort=id=>AREAS[AREA_IDX[id]].short;
+const LOCS={
+  full:{name:"Range + short game",has:["range","short","green"]},
+  range:{name:"Range only",has:["range"]},
+  short:{name:"Short game area",has:["short","green"]},
+  green:{name:"Putting green",has:["green"]},
+  home:{name:"At home",has:["home"]}
+};
+const LOC_LABEL={range:"Range",short:"Short game area",green:"Putting green",home:"Home"};
+/* stage: tech = technique, control = distance and control, pressure = games and scoring */
+const DR={
+gate:{name:"Start-line gate",area:"putt",areas:["putt"],loc:["green","home"],stage:"tech",dur:6,reps:"20 putts from 6 feet",kit:"Putter, balls and two tees",
+ steps:["Push two tees into the green about a foot in front of your ball, on your start line, just over a ball-width apart.","From 6 feet, roll putts through the gate without touching either tee.","If you keep catching a tee, check your putter face is square to your line at address before changing anything else."],
+ cue:"Hold your finish and watch the ball roll through the gate.",yt:"putting gate drill start line tees",anim:{s:"putt",set:"putter",props:["gate","hole"],hl:["club"]}},
+clock:{name:"Clock drill",area:"putt",areas:["putt"],loc:["green"],stage:"pressure",dur:8,reps:"4 balls round the hole, 3 to 5 feet",kit:"Putter and 4 balls",
+ steps:["Place four balls around the hole at 3 feet, at 12, 3, 6 and 9 o'clock.","Hole all four in a row. Miss one and start that circle again.","Once you clear 3 feet, move the balls out to 4 feet, then 5 feet."],
+ cue:"Same routine on every putt. Pick your line, two looks, then go.",yt:"putting clock drill",anim:{s:"putt",set:"putter",props:["hole"],hl:["arms"]}},
+ladder:{name:"Lag ladder",area:"putt",areas:["putt"],loc:["green"],stage:"control",dur:8,reps:"Putts from 20, 30 and 40 feet",kit:"Putter and 5 balls",
+ steps:["From 20 feet, putt towards the fringe. Each ball has to finish past the one before it, but short of the fringe.","Count how many balls you fit in before you run out of room.","Repeat from 30 feet, then 40 feet."],
+ cue:"Keep the same rhythm and change only the length of your stroke.",yt:"putting ladder drill distance control",anim:{s:"putt",set:"putter",props:["ladder"],hl:["arms"]}},
+three69:{name:"3-6-9 drill",area:"putt",areas:["putt"],loc:["green"],stage:"pressure",dur:6,reps:"Putts from 3, 6 and 9 feet",kit:"Putter and 3 balls",
+ steps:["Place balls at 3, 6 and 9 feet in a straight line from the hole.","Hole the 3-footer, then the 6, then the 9.","Miss any of them and start again from 3 feet. Count how many attempts it takes."],
+ cue:"Treat every putt like it's for your score. Full routine, every time.",yt:"3 6 9 putting drill",anim:{s:"putt",set:"putter",props:["hole"],hl:["club"]}},
+coin:{name:"Coin target lag",area:"putt",areas:["putt"],loc:["home","green"],stage:"control",dur:6,reps:"20 putts",kit:"Putter, balls and a coin",
+ steps:["Put a coin on the carpet or green 15 to 25 feet away.","Try to stop each putt right on top of the coin.","Move the coin after every three putts so no two distances are the same."],
+ cue:"Look at the target, not the ball, during your practice strokes.",yt:"putting distance control drill at home",anim:{s:"putt",set:"putter",props:["coin"],hl:["arms"]}},
+onehand:{name:"One-handed putts",area:"putt",areas:["putt"],loc:["green","home"],stage:"tech",dur:5,reps:"10 putts each hand",kit:"Putter and balls",
+ steps:["From 4 feet, hit 10 putts holding the putter with your lead hand only.","Then hit 10 with your trail hand only.","Finish with 10 using both hands and notice how smooth the stroke feels."],
+ cue:"Let your shoulders rock the putter. Keep your wrists quiet.",yt:"one handed putting drill",anim:{s:"putt",set:"putter",props:["hole"],hl:["arms"]}},
+eyes:{name:"Eyes-closed lag",area:"putt",areas:["putt"],loc:["green"],stage:"control",dur:5,reps:"10 putts from 20 to 30 feet",kit:"Putter and balls",
+ steps:["Set up to a 20 to 30 foot putt and take a good look at the hole.","Close your eyes and make your stroke.","Before you look, call where it finished: short, long, left or right. Then check."],
+ cue:"You're training feel. Notice the strike before you look.",yt:"eyes closed putting drill feel",anim:{s:"putt",set:"putter",props:["hole"],hl:["head"]}},
+rock:{name:"Shoulder rock drill",area:"putt",areas:["putt"],loc:["home","green"],stage:"tech",dur:4,reps:"2 minutes, then 10 putts",kit:"A spare club and your putter",
+ steps:["Hold a club across your chest with your arms crossed over it.","Get into your putting posture and rock your shoulders so the club tilts up and down.","Then hit 10 putts copying that same shoulder rock."],
+ cue:"Big muscles move the putter. Hands and wrists stay quiet.",yt:"putting shoulder rock drill club across chest",anim:{s:"putt",set:"putter",props:[],hl:["torso"]}},
+clock9:{name:"Clock-face distances",area:"wedge",areas:["wedge"],loc:["range","short"],stage:"tech",dur:10,reps:"5 balls at each of 3 swing lengths",kit:"Your wedges and balls",
+ steps:["With one wedge, hit 5 balls swinging your lead arm back to 8 o'clock, 5 to 9 o'clock and 5 to 10 o'clock.","Keep the same smooth tempo and a full, balanced finish on every ball.","Note the average carry for each length. Those are your stock wedge yardages."],
+ cue:"Change only the length of the backswing, never the speed.",yt:"wedge clock system drill distances",anim:{s:"half",set:"wedge",props:["flag"],hl:["arms"]}},
+wladder:{name:"Wedge ladder",area:"wedge",areas:["wedge"],loc:["range"],stage:"control",dur:10,reps:"1 ball each at 30, 40, 50 and 60 yards, up and back",kit:"Your wedges and balls",
+ steps:["Pick targets at roughly 30, 40, 50 and 60 yards.","Hit one ball to each target going up the ladder, then come back down.","Count how many finish within about 5 yards of the target."],
+ cue:"Full routine and a committed finish on every ball.",yt:"wedge ladder drill distance control",anim:{s:"half",set:"wedge",props:["ladder"],hl:["club"]}},
+landing:{name:"Landing-spot chips",area:"wedge",areas:["wedge"],loc:["short"],stage:"tech",dur:8,reps:"10 chips with each of 2 clubs",kit:"A wedge, a 9-iron, balls and a towel",
+ steps:["Lay a towel on the green a couple of yards on. That's your landing spot.","Chip 10 balls with a wedge, trying to land each one on the towel.","Repeat with a 9-iron and watch how much further it rolls out."],
+ cue:"Pick the landing spot, not the hole. Let the loft do the rest.",yt:"chipping landing spot towel drill",anim:{s:"chip",set:"wedge",props:["towelland","hole"],hl:["club"]}},
+updown:{name:"Up-and-down game",area:"wedge",areas:["wedge","putt"],loc:["short"],stage:"pressure",dur:15,reps:"9 balls from 9 different lies",kit:"A wedge, your putter and 9 balls",
+ steps:["Drop 9 balls in different spots round the green: fringe, rough, uphill and downhill lies.","Chip each one, then putt it out. Count how many you get down in two.","Write your score down and try to beat it next time."],
+ cue:"One ball, one chance, just like on the course.",yt:"up and down chipping game practice",anim:{s:"chip",set:"wedge",props:["hole"],hl:["club"]}},
+bump:{name:"Bump and run",area:"wedge",areas:["wedge"],loc:["short"],stage:"tech",dur:8,reps:"10 balls with a 7 or 8-iron",kit:"A 7 or 8-iron and balls",
+ steps:["From just off the green with plenty of green to work with, take a 7 or 8-iron.","Set up like a putt with the ball back in your stance and make a putting-style stroke.","Get the ball rolling early and let it run up to the hole."],
+ cue:"Low and rolling beats high and floaty when you have the room.",yt:"bump and run chip shot 8 iron",anim:{s:"chip",set:"iron",props:["hole"],hl:["arms"]}},
+leadchip:{name:"Lead-hand chips",area:"wedge",areas:["wedge"],loc:["short","home"],stage:"tech",dur:5,reps:"15 chips",kit:"A wedge and balls (foam balls at home)",
+ steps:["Hold your wedge with your lead hand only, ball in the middle of your stance.","Make small chipping strokes, keeping the shaft leaning towards the target through impact.","Finish with 5 chips using both hands and the same feel."],
+ cue:"Lead wrist stays flat. Brush the grass after the ball.",yt:"lead hand only chipping drill",anim:{s:"chip",set:"wedge",props:[],hl:["arms"]}},
+brush:{name:"Brush-the-line drill",area:"wedge",areas:["wedge","iron"],loc:["range","short"],stage:"tech",dur:6,reps:"10 rehearsals, then 10 balls",kit:"A wedge, balls and a tee",
+ steps:["Lay a tee flat on the grass at right angles to your target line.","Make 10 half swings that brush the grass just on the target side of the tee.","Then place a ball just ahead of the tee and hit 10, brushing the grass after the ball."],
+ cue:"Turn your chest through so the low point moves forward.",yt:"low point control drill wedge",anim:{s:"half",set:"wedge",props:["towel"],hl:["club"]}},
+bunker:{name:"Bunker line drill",area:"wedge",areas:["wedge"],loc:["short"],stage:"tech",dur:8,reps:"10 splashes, then 10 balls",kit:"A sand wedge and balls",
+ steps:["Draw a line in the sand at right angles to your target and set up with it in the middle of your stance.","Splash the sand out starting right on the line. Do 10 and check where each one entered.","Then put a ball 2 inches in front of a fresh line and splash it out the same way."],
+ cue:"Open the face, then swing. Hit the sand, not the ball.",yt:"bunker line drill sand splash",anim:{s:"half",set:"wedge",props:["sand"],hl:["club"]}},
+towel:{name:"Towel drill",area:"iron",areas:["iron"],loc:["range"],stage:"tech",dur:8,reps:"15 balls",kit:"A 7-iron, balls and a towel",
+ steps:["Lay a towel on the ground about 4 inches behind your ball.","Hit 7-iron shots without touching the towel.","If you clip it, feel more weight on your lead side at impact."],
+ cue:"Ball first, then turf.",yt:"towel drill irons ball first contact",anim:{s:"full",set:"iron",props:["towel"],hl:["club"]}},
+sticks:{name:"Alignment sticks",area:"iron",areas:["iron","driver"],loc:["range"],stage:"tech",dur:6,reps:"10 balls",kit:"Two alignment sticks or spare clubs",
+ steps:["Lay one stick on the ground pointing at your target, just outside the ball.","Lay a second stick along your toes, parallel to the first.","Hit 10 shots, stepping back to check your feet, hips and shoulders all match the sticks."],
+ cue:"Aim the clubface first, then set your body parallel to it.",yt:"alignment sticks setup drill golf",anim:{s:"full",set:"iron",props:["sticks","flag"],hl:["legs"]}},
+spray:{name:"Strike pattern check",area:"iron",areas:["iron"],loc:["range"],stage:"tech",dur:8,reps:"10 balls",kit:"A 7-iron and foot powder or dry shampoo",
+ steps:["Spray foot powder or dry shampoo on the clubface.","Hit a shot, check the mark, then wipe and re-spray.","Mostly off the toe? Try standing a fraction closer. Mostly off the heel? A fraction further away."],
+ cue:"Find the centre first. Distance comes from a centred strike.",yt:"foot spray strike drill irons",anim:{s:"full",set:"iron",props:[],hl:["club"]}},
+feet:{name:"Feet-together swings",area:"iron",areas:["iron","driver"],loc:["range"],stage:"tech",dur:6,reps:"10 balls at 70% effort",kit:"A 7-iron and balls",
+ steps:["Stand with your feet together and the ball in the middle of your stance.","Make smooth swings at about 70% effort.","Hold your finish for a 3-count on every shot."],
+ cue:"Turn around your spine. If you lose balance, you're swaying.",yt:"feet together drill golf balance",anim:{s:"full",set:"feet",props:[],hl:["legs"]}},
+pause:{name:"Pause at the top",area:"iron",areas:["iron","driver"],loc:["range","home"],stage:"tech",dur:6,reps:"10 balls",kit:"A 7-iron and balls",
+ steps:["Swing to the top and pause for a full second.","Start the downswing smoothly, from the ground up.","Hit 5 with the pause, then 5 normal swings with the same smooth change of direction."],
+ cue:"No rush from the top. Let your lower body start it.",yt:"pause at the top drill golf transition",anim:{s:"pause",set:"iron",props:[],hl:["arms"]}},
+step:{name:"Step drill",area:"iron",areas:["iron","driver"],loc:["range","home"],stage:"control",dur:6,reps:"10 balls",kit:"A 7-iron and balls",
+ steps:["Start with your feet together.","As you swing back, step your lead foot towards the target.","Plant it and swing through, letting your body unwind in order: hips, chest, then arms."],
+ cue:"Step, then swing. Feel the ground push you through.",yt:"step drill golf sequencing",anim:{s:"step",set:"step",props:[],hl:["legs"]}},
+knock:{name:"Three-quarter knockdowns",area:"iron",areas:["iron"],loc:["range"],stage:"control",dur:8,reps:"10 balls",kit:"Your irons and balls",
+ steps:["Take one more club than normal and grip down an inch.","Make a three-quarter backswing and a three-quarter finish.","Aim for a lower ball flight and a solid strike every time."],
+ cue:"Shorter swing, same tempo. Hold the finish low.",yt:"knockdown shot three quarter iron",anim:{s:"threeq",set:"iron",props:["flag"],hl:["arms"]}},
+course:{name:"Play the course",area:"iron",areas:["iron","driver","wedge"],loc:["range"],stage:"pressure",dur:15,reps:"14 balls, a new target every shot",kit:"Your full bag",
+ steps:["Picture your home course and hit each shot with the club you'd use there.","Change club and target on every ball, with your full pre-shot routine.","Score each shot: 2 points if it finds the green or fairway, 1 if it's playable, 0 if it's in trouble."],
+ cue:"Practise like you play. One ball, one target, full routine.",yt:"range practice game play the course",anim:{s:"full",set:"iron",props:["flag"],hl:["club"]}},
+impact:{name:"Impact position rehearsal",area:"iron",areas:["iron"],loc:["home"],stage:"tech",dur:5,reps:"20 slow rehearsals",kit:"An iron and a mirror or window",
+ steps:["Set up with an iron in front of a mirror or window.","Swing slowly to impact and stop: hands ahead of the ball, weight on your lead side, hips open.","Hold it for a 3-count, check it, then repeat."],
+ cue:"Hands ahead, shaft leaning forward, chest over the ball.",yt:"impact position drill at home golf",anim:{s:"impact",set:"iron",props:[],hl:["arms"],noBall:true}},
+setup:{name:"Driver set-up check",area:"driver",areas:["driver"],loc:["range"],stage:"tech",dur:5,reps:"10 balls",kit:"Driver, tees and balls",
+ steps:["Tee it so half the ball sits above the top edge of the driver.","Play the ball off the inside of your lead heel, feet a little wider than your shoulders.","Tilt your spine slightly away from the target so your trail shoulder sits lower."],
+ cue:"Set up to hit up on it.",yt:"driver setup ball position tee height",anim:{s:"full",set:"driver",props:["flag"],hl:["torso"]}},
+tee2:{name:"Two-tee drill",area:"driver",areas:["driver"],loc:["range"],stage:"tech",dur:8,reps:"10 balls",kit:"Driver, balls and two tees",
+ steps:["Tee up your ball, then push a second tee into the ground about 4 inches in front of it, on your target line and a little lower.","Hit drives and try to clip the second tee out after the ball.","Clipping it means the club is still travelling level or upwards through impact."],
+ cue:"Stay behind the ball and sweep it off the tee.",yt:"two tee drill driver hit up on the ball",anim:{s:"full",set:"driver",props:["tee2"],hl:["club"]}},
+cover:{name:"Headcover path drill",area:"driver",areas:["driver"],loc:["range"],stage:"tech",dur:8,reps:"10 balls",kit:"Driver, balls and a headcover",
+ steps:["Place a headcover about 6 inches outside the ball and slightly behind it.","Swing without touching the headcover.","Hitting it means the club is coming from outside the line, which causes slices and pulls."],
+ cue:"Feel the club drop inside on the way down, then swing out towards the target.",yt:"headcover drill fix slice driver",anim:{s:"full",set:"driver",props:[],hl:["club"]}},
+fairway:{name:"Fairway finder",area:"driver",areas:["driver"],loc:["range"],stage:"pressure",dur:12,reps:"14 drives",kit:"Driver, tees and balls",
+ steps:["Pick two markers on the range about 30 yards apart. That's your fairway.","Hit 14 drives, one for each hole of a round, with your full routine every time.","Count the fairways you hit, write it down and try to beat it next session."],
+ cue:"Pick the smallest target you can see and commit to it.",yt:"driver accuracy practice game fairways",anim:{s:"full",set:"driver",props:["flag"],hl:["club"]}},
+tempo:{name:"3-to-1 tempo",area:"driver",areas:["driver","iron"],loc:["range","home"],stage:"tech",dur:6,reps:"5 rehearsals, then 10 balls",kit:"Driver and balls",
+ steps:["Count 'one, two' as you swing back and 'three' as you strike.","Make 5 practice swings to the count, then hit 10 drives.","Keep the count the same even when you want to hit it harder."],
+ cue:"Smooth back, then let it go.",yt:"golf swing tempo 3 to 1 drill",anim:{s:"full",set:"driver",props:[],hl:["arms"]}},
+whoosh:{name:"Whoosh speed drill",area:"driver",areas:["driver"],loc:["home","range"],stage:"control",dur:5,reps:"3 sets of 5 swings",kit:"Your driver",
+ steps:["Turn your driver upside down and hold it just below the head.","Make full swings and listen for the whoosh. Make it loudest just after where the ball would be.","Rest between sets, then hit a few balls normally and keep that late speed."],
+ cue:"Speed at the bottom, not at the top.",yt:"whoosh drill swing speed golf",anim:{s:"full",set:"driver",props:[],hl:["club"],noBall:true}}
+};
+for(const k in DR)DR[k].id=k;
+/* One YouTube tutorial per drill: [video id, title]. */
+const VIDS={
+  gate:["06PPf920EcE","Hole more putts: putting gate drill"],clock:["sWz2hvtK2H4","Putting clock drill"],ladder:["COJRUps4g1o","The simple ladder drill that fixes lag putting"],
+  three69:["BM4GYP1wktY","3/6/9 putting drill"],coin:["Q_u1LLAf97Y","Indoor putting drills at home on carpet"],onehand:["K6ZUS-Xg2UI","The one hand putting drill"],
+  eyes:["CwfXDv-e6uE","Close your eyes putting drill"],rock:["d6os9wk1i1E","Putting with your shoulders"],
+  clock9:["UeEkXxKSxzs","Distance control with wedges: clock face system"],wladder:["GaG952tg6_k","Wedge drill: the ladder game"],landing:["7EEIQPxE-ig","Chipping drill: picking your landing spot"],
+  updown:["CZiiwWDilJw","Gamify your short game: putting and chipping drills"],bump:["lhIUmgD0y1I","How to hit a bump and run"],leadchip:["7r3cqvFcgAg","The one-handed chipping drill"],
+  brush:["zFbVxjkQDoI","Low point control drill"],bunker:["CTPNifgLpJY","Bunkers: the line in the sand drill"],
+  towel:["6rKBktQ_vHw","Towel drill for consistent contact (Alistair Davies)"],sticks:["87b3E0H9E9Y","Using alignment sticks to aim properly"],spray:["wcgqVGAqZOQ","Use foot spray to find your sweet spot"],
+  feet:["fFH73XecQbs","Feet together drill: balance in the swing"],pause:["XN6q3b0brHs","The transition pause drill"],step:["oXu57UeFbeI","Step drill for power"],
+  knock:["4xVf_tCD57E","How to hit a knockdown iron (Titleist Tips)"],course:["yYe8PGIaWFw","Driving range game: birdie, par, bogey"],impact:["9cXMBbYxMJA","Indoor drill: hands-ahead impact position"],
+  setup:["0qiBT-LLZcc","Set-up and tee height for driver"],tee2:["hw4kVhyV79g","Hank Haney: two-tee driving drill (Golf Digest)"],cover:["K-qmcX2CBSU","Grab your headcover and stop slicing"],
+  fairway:["59FlqcxxWiY","Driver practice routine: hit more fairways"],tempo:["V-8UIPxsJiQ","Tour Tempo: the 3-to-1 rule"],whoosh:["B1RYmZD7xRs","Where's the whoosh? Upside-down speed drill"]
+};
+for(const k in VIDS)if(DR[k]){DR[k].vid=VIDS[k][0];DR[k].vt=VIDS[k][1];}
+const TESTS={
+  putt:{name:"Putting test",where:"Putting green",anim:{s:"putt",set:"putter",props:["hole"],hl:["club"]},q:[
+    {name:"Short putts",how:"Hit 10 putts from 4 feet, moving round the hole so each one has a different break.",ask:"How many did you hole?",opts:["5 or fewer","6 or 7","8 or 9","All 10"]},
+    {name:"Lag putts",how:"Hit 6 putts from about 30 feet, roughly 10 big paces.",ask:"How many finished within a putter length of the hole?",opts:["0 or 1","2 or 3","4 or 5","All 6"]}]},
+  wedge:{name:"Wedge test",where:"Range and chipping green",anim:{s:"half",set:"wedge",props:["flag"],hl:["club"]},q:[
+    {name:"Distance control",how:"Hit 10 balls with a wedge at a target 50 yards away.",ask:"How many finished within about 5 yards of it?",opts:["0 to 2","3 or 4","5 or 6","7 or more"]},
+    {name:"Chipping",how:"Chip 10 balls from just off the green to a hole about 10 yards away.",ask:"How many finished within a putter length?",opts:["0 to 2","3 or 4","5 or 6","7 or more"]}]},
+  iron:{name:"Iron test",where:"Driving range",anim:{s:"full",set:"iron",props:["flag"],hl:["club"]},q:[
+    {name:"Strike",how:"Hit 10 shots with a 7-iron. On grass, look for a divot that starts after the ball. On a mat, judge by feel and sound.",ask:"How many were struck solidly, ball first?",opts:["3 or fewer","4 or 5","6 or 7","8 or more"]},
+    {name:"Accuracy",how:"Hit 10 more 7-irons at a flag, picturing a green about 30 yards wide around it.",ask:"How many would have finished on that green?",opts:["0 to 2","3 or 4","5 or 6","7 or more"]}]},
+  driver:{name:"Driver test",where:"Driving range",anim:{s:"full",set:"driver",props:["flag"],hl:["club"]},q:[
+    {name:"Fairways",how:"Pick two markers on the range about 30 yards apart as your fairway, then hit 10 drives with your full routine.",ask:"How many finished in the fairway?",opts:["3 or fewer","4 or 5","6 or 7","8 or more"]},
+    {name:"Strike",how:"Spray the driver face with foot powder or dry shampoo before each of 10 drives.",ask:"How many marks were in the centre, inside the size of a 10p coin?",opts:["2 or fewer","3 or 4","5 or 6","7 or more"]}]}
+};
+const WEEKS=[{name:"Fundamentals",note:"Technique drills"},{name:"Build",note:"Distance and control"},{name:"Pressure",note:"Games and scoring"},{name:"Play",note:"Mix it up, then retest"}];
+const PLAN_PAIRS=[[0,1],[2,0],[1,3],[0,2],[1,0],[3,0],[0,1],[2,1],[0,3],[1,2],[0,1],[2,3]];
+const STAGEW=[{tech:30,control:10,pressure:0},{tech:15,control:25,pressure:10},{tech:5,control:15,pressure:30},{tech:10,control:15,pressure:25}];
+const QUICK={
+  warm:{title:"Pre-round warm-up",kicker:"Before you play",loc:"full",items:[["clock9",4],["sticks",3],["setup",3],["ladder",3],["gate",2]]},
+  tune:{title:"Putting tune-up",kicker:"On the practice green",loc:"green",items:[["gate",3],["clock",4],["ladder",3]]}
+};
+const LENS=[20,30,45,60],LEVEL_SCORE=[25,50,75,100],PREP_FIRST=30,PREP=25,SESSIONS=12,DAY_MS=864e5;
+
+/* ---------- Storage: the viewer's Claude account when signed in, otherwise this browser ---------- */
+const KEY="range-golf-v1";
+const RATES=[[0.85,"Slower"],[1,"Normal"],[1.15,"Faster"]];
+function normalize(o){
+  const n={tests:[],done:{},round:1,log:[],len:30,loc:"full",voice:true,sound:true,vname:"",rate:1,detail:"full",load:0,shaky:{},coach:null,goals:[]};
+  if(!o||typeof o!=="object")return n;
+  if(Array.isArray(o.tests))n.tests=o.tests.filter(t=>t&&typeof t.t==="number"&&AREA_IDX[t.area]!=null&&typeof t.score==="number");
+  if(o.done&&typeof o.done==="object"&&!Array.isArray(o.done))for(const k in o.done){const d=+k;if(d>=1&&d<=SESSIONS)n.done[d]=o.done[k];}
+  if(Array.isArray(o.log))n.log=o.log.filter(l=>l&&typeof l.t==="number");
+  if(typeof o.round==="number"&&o.round>=1)n.round=o.round;
+  if(LENS.includes(o.len))n.len=o.len;
+  if(LOCS[o.loc])n.loc=o.loc;
+  if(typeof o.voice==="boolean")n.voice=o.voice;
+  if(typeof o.sound==="boolean")n.sound=o.sound;
+  if(typeof o.vname==="string")n.vname=o.vname.slice(0,160);
+  if(RATES.some(r=>r[0]===o.rate))n.rate=o.rate;
+  if(o.detail==="short"||o.detail==="full")n.detail=o.detail;
+  if(typeof o.load==="number")n.load=Math.max(-2,Math.min(2,Math.round(o.load)));
+  if(o.shaky&&typeof o.shaky==="object")for(const k in o.shaky)if(AREA_IDX[k]!=null&&typeof o.shaky[k]==="number")n.shaky[k]=o.shaky[k];
+  if(o.coach&&typeof o.coach==="object"&&typeof o.coach.t==="number")n.coach=cleanCoach(o.coach);
+  if(Array.isArray(o.goals))n.goals=o.goals.filter(a=>AREA_IDX[a]!=null).slice(0,2);
+  return n;
+}
+let S=normalize({});
+try{const raw=localStorage.getItem(KEY);if(raw)S=normalize(JSON.parse(raw));}catch(e){}
+/* mode "account": one record per person at golfers/<their id>, readable and writable only by that person. */
+const ACC={mode:"local",readOnly:false,uid:null,ref:null,user:null,me:null,owner:false,writing:false,pending:false};
+const serial=()=>({v:1,tests:S.tests,done:S.done,round:S.round,log:S.log.slice(-400),len:S.len,loc:S.loc,voice:S.voice,sound:S.sound,vname:S.vname,rate:S.rate,detail:S.detail,load:S.load,shaky:S.shaky,coach:S.coach,goals:S.goals});
+function save(){
+  if(ACC.mode==="account"){queueWrite();return;}
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function queueWrite(){
+  if(ACC.writing){ACC.pending=true;return;}
+  ACC.writing=true;
+  try{
+    do{
+      ACC.pending=false;
+      try{await ACC.ref.set(serial());}
+      catch(e){
+        if(e&&e.code==="unavailable"){await sleep(500+Math.random()*1000);try{await ACC.ref.set(serial());}catch(e2){onWriteFail(e2);}}
+        else onWriteFail(e);
+      }
+    }while(ACC.pending&&ACC.mode==="account");
+  }finally{ACC.writing=false;}
+}
+function onWriteFail(e){
+  const c=e&&e.code;
+  if(c==="resource_exhausted"||c==="unavailable")return;
+  ACC.mode="local";ACC.readOnly=c!=="quota_exceeded";ACC.full=c==="quota_exceeded";
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(_){}
+  renderAll();
+}
+
+/* ---------- Scores ---------- */
+const isDone=n=>!!S.done[n];
+function nextSession(){for(let n=1;n<=SESSIONS;n++)if(!isDone(n))return n;return null;}
+function doneCount(){let c=0;for(let n=1;n<=SESSIONS;n++)if(isDone(n))c++;return c;}
+function latest(area){for(let i=S.tests.length-1;i>=0;i--)if(S.tests[i].area===area)return S.tests[i];return null;}
+const firstTest=area=>S.tests.find(t=>t.area===area)||null;
+function scores(){const o={};AREAS.forEach(a=>{const t=latest(a.id);o[a.id]=t?t.score:null;});return o;}
+function firstScores(){const o={};AREAS.forEach(a=>{const t=firstTest(a.id);o[a.id]=t?t.score:null;});return o;}
+const needOf=v=>110-(v==null?50:v);
+function overallOf(s){const v=AREAS.map(a=>s[a.id]).filter(x=>x!=null);return v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length):null;}
+const testedCount=()=>AREAS.filter(a=>latest(a.id)).length;
+function ranked(){const s=scores();return AREAS.map(a=>a.id).sort((x,y)=>(s[x]==null?50:s[x])-(s[y]==null?50:s[y])||AREA_IDX[x]-AREA_IDX[y]);}
+const lvColor=v=>v==null?"var(--muted)":v<=35?"var(--band)":v<=55?"var(--mid)":"var(--done)";
+const lvName=v=>v==null?"Not tested":v<=35?"Needs work":v<=55?"Fair":v<=80?"Good":"Strong";
+function hash(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}return (h>>>0)/4294967295;}
+
+/* ---------- Adaptation ---------- */
+const coachOn=()=>!!(S.coach&&S.coach.until>Date.now());
+const shakyNow=()=>{const now=Date.now();return AREAS.map(a=>a.id).filter(a=>S.shaky[a]&&S.shaky[a]>now).sort((x,y)=>S.shaky[y]-S.shaky[x]);};
+const listAreas=ids=>{const n=ids.map(a=>areaName(a).toLowerCase());return n.length>1?n.slice(0,-1).join(", ")+" and "+n[n.length-1]:(n[0]||"");};
+/* Order used to pick each session's focus: weakest first, then areas flagged after recent sessions, then the coach's priorities on top. */
+function planRank(){
+  let rk=ranked();
+  const sh=shakyNow();if(sh.length)rk=[...sh,...rk.filter(a=>!sh.includes(a))];
+  if(coachOn()&&S.coach.focus.length)rk=[...S.coach.focus,...rk.filter(a=>!S.coach.focus.includes(a))];
+  return rk;
+}
+function stageWeights(w){
+  const b=STAGEW[w],l=S.load,c=coachOn()?S.coach.stage:null;
+  const o={tech:b.tech-l*9,control:b.control+l*2,pressure:b.pressure+l*11};
+  if(c&&o[c]!=null)o[c]+=20;
+  return o;
+}
+function adaptNotes(){
+  const n=[],sh=shakyNow();
+  if(S.goals.length){
+    n.push(`Working on ${listAreas(S.goals)}, as you chose.`);
+    const has=LOCS[S.loc].has,miss=S.goals.filter(a=>!Object.values(DR).some(d=>d.area===a&&d.loc.some(l=>has.includes(l))));
+    if(miss.length)n.push(`There are no ${listAreas(miss)} drills for "${LOCS[S.loc].name}", so this session covers what you can do there.`);
+  }
+  if(S.load>0)n.push(`Difficulty up ${S.load>1?"two steps":"a step"}: more pressure games and scoring challenges.`);
+  if(S.load<0)n.push(`Difficulty down ${S.load<-1?"two steps":"a step"}: more technique drills and fewer games.`);
+  if(sh.length)n.push(`A bit more ${listAreas(sh)} after you flagged it after a session.`);
+  if(coachOn())n.push(`Your coach review from ${shortDate(S.coach.t)} is shaping this week.`);
+  return n;
+}
+
+/* ---------- Sessions ---------- */
+const VENUE={range:0,short:1,green:2,home:3},STAGE_ORDER={tech:0,control:1,pressure:2};
+const drSecs=(it,first)=>(first?PREP_FIRST:PREP)+it.dur*60;
+const sessSecs=items=>items.reduce((a,it,i)=>a+drSecs(it,i===0),0);
+const minsOf=items=>Math.max(1,Math.round(sessSecs(items)/60));
+function venueOf(d,has){const v=d.loc.filter(l=>has.includes(l)).map(l=>VENUE[l]);return v.length?Math.min(...v):9;}
+function sortItems(items,has){return items.sort((a,b)=>venueOf(DR[a.id],has)-venueOf(DR[b.id],has)||STAGE_ORDER[DR[a.id].stage]-STAGE_ORDER[DR[b.id].stage]);}
+function focusOf(n){
+  const pr=PLAN_PAIRS[(n-1)%SESSIONS],rk=planRank();
+  /* Areas the person chose come first in every session. */
+  const g=S.goals;
+  if(g.length===2)return n%2?[g[1],g[0]]:[g[0],g[1]];
+  if(g.length===1)return [g[0],((coachOn()&&S.coach.focus.find(a=>a!==g[0]))||[rk[pr[0]],rk[pr[1]],...rk].find(a=>a!==g[0]))];
+  /* With only three sessions a week, an active coach review sets the focus of every session in its week. */
+  if(coachOn()&&S.coach.focus.length){const f=S.coach.focus;return [f[0],f[1]||rk.find(a=>a!==f[0])];}
+  return [rk[pr[0]],rk[pr[1]]];
+}
+function practicePlan(n){
+  const w=Math.floor((n-1)/3),[f1,f2]=focusOf(n),s=scores(),has=LOCS[S.loc].has,sw=stageWeights(w),co=coachOn()?S.coach:null;
+  const cand=Object.values(DR).filter(d=>d.loc.some(l=>has.includes(l))&&!(co&&co.avoid.includes(d.id))).map(d=>{
+    let v=0;d.areas.forEach((a,i)=>{v+=needOf(s[a])*([1,.5,.3][i]||.3)*(a===f1?2.6:a===f2?2:.6);});
+    v+=sw[d.stage]+hash(n+"|"+d.id+"|"+S.round)*30;
+    if(co&&co.favour.includes(d.id))v+=45;
+    return {d,v};
+  }).sort((a,b)=>b.v-a.v);
+  /* Greedy pick with diminishing returns per area, so a session mixes its two focus areas. */
+  const target=S.len*60,items=[],cnt={},pool=cand.slice();let t=0;
+  while(pool.length){
+    let bi=0,bv=-Infinity;
+    pool.forEach((c,i)=>{const v=c.v*Math.pow(.6,cnt[c.d.area]||0);if(v>bv){bv=v;bi=i;}});
+    const {d}=pool.splice(bi,1)[0],it={id:d.id,dur:d.dur},secs=drSecs(it,!items.length);
+    if(items.length>=2&&t+secs>target+60)continue;
+    items.push(it);t+=secs;cnt[d.area]=(cnt[d.area]||0)+1;
+    if(items.length>=2&&t>=target-90)break;
+  }
+  sortItems(items,has);
+  return {key:"plan:"+n,kind:"plan",n,w,f1,f2,loc:S.loc,items,notes:adaptNotes(),title:"Practice session",kicker:`Session ${n} of ${SESSIONS} · Week ${w+1}, ${WEEKS[w].name}`};
+}
+function quickSession(k){const q=QUICK[k];return {key:"quick:"+k,kind:"quick",q:k,loc:q.loc,items:q.items.map(([id,dur])=>({id,dur})),title:q.title,kicker:q.kicker};}
+function targetSession(area){
+  const here=LOCS[S.loc].has,okHere=Object.values(DR).some(d=>d.area===area&&d.loc.some(l=>here.includes(l)));
+  const locKey=okHere?S.loc:AREAS[AREA_IDX[area]].where==="green"?"green":AREAS[AREA_IDX[area]].where==="short"?"short":"range";
+  const has=LOCS[locKey].has;
+  const list=Object.values(DR).filter(d=>d.areas.includes(area)&&d.loc.some(l=>has.includes(l))).sort((a,b)=>(a.area===area?0:1)-(b.area===area?0:1)||STAGE_ORDER[a.stage]-STAGE_ORDER[b.stage]);
+  const items=[];let t=0;
+  for(const d of list){const it={id:d.id,dur:d.dur},secs=drSecs(it,!items.length);if(items.length>=2&&t+secs>25*60+60)continue;items.push(it);t+=secs;}
+  sortItems(items,has);
+  return {key:"target:"+area,kind:"target",area,loc:locKey,items,title:areaName(area),kicker:`Target an area · ${LOCS[locKey].name}`};
+}
+function singleSession(id){return {key:"single:"+id,kind:"single",items:[{id,dur:DR[id].dur}],title:DR[id].name,kicker:"Single drill"};}
+function sessFromKey(k){
+  const i=k.indexOf(":"),a=i<0?k:k.slice(0,i),b=i<0?"":k.slice(i+1);
+  if(a==="plan")return practicePlan(+b);
+  if(a==="quick")return quickSession(b);
+  if(a==="target")return targetSession(b);
+  return singleSession(b);
+}
+const doseText=(d,dur)=>`${dur} min · ${d.reps}`;
+const ytURL=d=>"https://www.youtube.com/results?search_query="+encodeURIComponent(d.yt);
+const watchURL=d=>d.vid?"https://www.youtube.com/watch?v="+d.vid:ytURL(d);
+/* Claude's viewer blocks embedded videos, so there the tutorial opens on YouTube; elsewhere (GitHub) it plays in the drill card. */
+const EMBED=!(window.claude&&typeof window.claude.use==="function");
+
+/* ---------- Dates ---------- */
+function dayKey(ts){const d=new Date(ts);return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();}
+const shortDate=ts=>new Date(ts).toLocaleDateString("en-GB",{day:"numeric",month:"short"});
+function thisWeek(){const now=new Date();now.setHours(0,0,0,0);const start=new Date(now);start.setDate(now.getDate()-((now.getDay()+6)%7));return S.log.filter(l=>l.t>=+start).length;}
+
+const REDUCED=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);
+const $=id=>document.getElementById(id);
+const esc=v=>String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ICON={
+  close:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  voice:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10.5h.01M12 10.5h.01M16 10.5h.01" stroke-width="3"/></svg>',
+  sound:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12"/></svg>',
+  play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>',
+  pause:'<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4.5" width="4.2" height="15" rx="1"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1"/></svg>',
+  prev:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2.4v14H6zM20 5v14L9.5 12z"/></svg>',
+  next:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.6 5H18v14h-2.4zM4 5v14l10.5-7z"/></svg>',
+  chev:'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
+  ext:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/></svg>',
+  speak:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 010 7"/></svg>',
+  flag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V3.5l10 4-10 4"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+};
+
+ICON.spark='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l3-7 3 14 3-7h3"/></svg>';
+ICON.coach='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4z"/><path d="M18.5 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>';
+
+/* ---------- Speech and sound ---------- */
+const canSpeak=("speechSynthesis" in window)&&typeof window.SpeechSynthesisUtterance!=="undefined";
+let voice=null;
+const NOVELTY=/^(Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Good News|Jester|Organ|Superstar|Trinoids|Whisper|Wobble|Zarvox)\b/i;
+const ACCENTS={GB:"British",IE:"Irish",US:"American",AU:"Australian",NZ:"New Zealand",ZA:"South African",IN:"Indian",CA:"Canadian",SG:"Singaporean"};
+function accentOf(lang){if(/gbsct|scot/i.test(lang||""))return "Scottish";const m=/^en[-_]([A-Za-z]{2})/.exec(lang||"");return (m&&ACCENTS[m[1].toUpperCase()])||"English";}
+const accentRank=lang=>{const a=accentOf(lang);return a==="British"||a==="Irish"||a==="Scottish"?0:a==="American"?2:1;};
+function englishVoices(){
+  if(!canSpeak)return [];
+  let vs=[];try{vs=speechSynthesis.getVoices()||[];}catch(e){}
+  const seen=new Set();
+  return vs.filter(v=>/^en/i.test(v.lang)&&!NOVELTY.test(v.name)&&!seen.has(v.name)&&seen.add(v.name)).sort((a,b)=>accentRank(a.lang)-accentRank(b.lang)||a.name.localeCompare(b.name));
+}
+function pickVoice(){
+  if(!canSpeak)return;
+  const vs=englishVoices();
+  voice=(S.vname&&vs.find(v=>v.name===S.vname))||vs.find(v=>/en[-_]GB/i.test(v.lang)&&/natural|enhanced|premium|neural/i.test(v.name))||vs.find(v=>/en[-_]GB/i.test(v.lang))||vs[0]||null;
+}
+if(canSpeak){const onVoices=()=>{pickVoice();const vs=document.getElementById("voiceSheet");if(vs&&!vs.hidden)renderVoiceSheet();};pickVoice();try{speechSynthesis.addEventListener("voiceschanged",onVoices);}catch(e){try{speechSynthesis.onvoiceschanged=onVoices;}catch(_){}}}
+function say(text,interrupt,force){
+  if(!canSpeak||(!S.voice&&!force)||!text)return;
+  try{
+    if(interrupt!==false)speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    if(voice){u.voice=voice;u.lang=voice.lang;}else u.lang="en-GB";
+    u.rate=S.rate||1;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function hush(){if(canSpeak){try{speechSynthesis.cancel();}catch(e){}}}
+let AC=null;
+function ensureAudio(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume();}catch(e){AC=null;}}
+function beep(freq,dur,vol,delay){
+  if(!S.sound||!AC)return;
+  try{
+    const t=AC.currentTime+(delay||0),o=AC.createOscillator(),g=AC.createGain();
+    o.type="sine";o.frequency.value=freq;
+    g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol||0.18,t+0.012);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+dur+0.03);
+  }catch(e){}
+}
+let wake=null;
+async function requestWake(){try{if("wakeLock" in navigator&&!wake){wake=await navigator.wakeLock.request("screen");wake.addEventListener("release",()=>{wake=null;});}}catch(e){wake=null;}}
+function releaseWake(){try{if(wake)wake.release();}catch(e){}wake=null;}
+
+/* ---------- Animation ---------- */
+const anims=new Set();
+function uAt(a,t){const sw=SWINGS[a.ex.anim.s];if(REDUCED)return sw.still;return (Math.max(0,t-a.t0)%sw.per)/sw.per;}
+function drawAnim(a,t){const u=uAt(a,t),key=a.ex.id+"|"+u.toFixed(3);if(key!==a.key){a.svg.innerHTML=golfMarkup(a.ex,u);a.key=key;}}
+function frame(t){
+  if(P.open)tickPlayer(t);
+  anims.forEach(a=>{if(!a.paused&&a.svg&&a.svg.isConnected)drawAnim(a,t);});
+  requestAnimationFrame(frame);
+}
+
+/* ---------- Shared markup ---------- */
+function ringSVG(v){const r=40,c=2*Math.PI*r;return `<svg viewBox="0 0 100 100" aria-hidden="true"><circle class="sr-bg" cx="50" cy="50" r="${r}"/><circle class="sr-fg" cx="50" cy="50" r="${r}" stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${(c*(1-(v||0)/100)).toFixed(1)}"/></svg>`;}
+function ringBox(v,cls,attrs){return `<${attrs?"button type=\"button\"":"div"} class="ringbox ${cls||""}" ${attrs||""}>${ringSVG(v)}<span class="sr-num"><b>${v==null?"–":v}</b><small>/ 100</small></span></${attrs?"button":"div"}>`;}
+function exRow(it,label){
+  const d=DR[it.id];
+  return `<li><button type="button" class="ex-row" data-ex="${d.id}" aria-label="${esc(d.name)}: how to do it"><span class="thumb">${golfThumb(d)}</span><span><span class="nm">${esc(d.name)}</span><span class="ds">${esc(label!=null?label:doseText(d,it.dur))}</span></span>${ICON.chev}</button></li>`;
+}
+function areaBars(cur,ref){
+  return `<div class="bars">${AREAS.map(a=>{
+    const v=cur[a.id],r=ref?ref[a.id]:null;
+    return `<div class="abar" style="--c:${lvColor(v)}"><span class="an">${a.name}</span><span class="track">${v!=null?`<span class="fill" style="width:${v}%"></span>`:""}${v!=null&&r!=null&&r!==v?`<span class="ghost" style="left:calc(${r}% - 1px)"></span>`:""}</span><span class="av${v==null?" none":""}">${v==null?"Not tested":v+" · "+lvName(v)}</span></div>`;
+  }).join("")}</div>`;
+}
+function worksOn(sess){
+  const seen=[];sess.items.forEach(it=>{const a=DR[it.id].area;if(!seen.includes(a))seen.push(a);});
+  const order=[sess.f1,sess.f2].filter(Boolean);
+  seen.sort((x,y)=>(order.indexOf(x)<0?9:order.indexOf(x))-(order.indexOf(y)<0?9:order.indexOf(y)));
+  return seen;
+}
+function sessCard(sess,where){
+  const done=sess.kind==="plan"&&isDone(sess.n),areas=worksOn(sess);
+  let h=`<section class="card session"><div class="sess-top"><p class="kicker">${sess.kicker}</p>${done?'<span class="badge">Done</span>':""}</div><h2 class="h2">${sess.title}</h2>`;
+  h+=`<p class="focus">Works on ${areas.map(a=>`<b class="${a===sess.f1||a===sess.f2?"":"other"}">${areaName(a)}</b>`).join("")}</p>`;
+  if(sess.notes&&sess.notes.length)h+=`<ul class="adapt">${sess.notes.map(n=>`<li>${ICON.spark}<span>${n}</span></li>`).join("")}</ul>`;
+  if(where==="today"||where==="plan"){
+  h+=`<div class="opt-group"><span class="len-l" id="goalL-${where}">What do you want to work on?</span><div class="chips" role="group" aria-labelledby="goalL-${where}"><button type="button" class="chip" data-act="goal" data-goal="" aria-pressed="${!S.goals.length}">Follow my tests</button>${AREAS.map(a=>`<button type="button" class="chip" data-act="goal" data-goal="${a.id}" aria-pressed="${S.goals.includes(a.id)}">${a.name}</button>`).join("")}</div><span class="fine">Pick up to two. They come first in every session.</span></div>`;
+    h+=`<div class="opt-group"><span class="len-l" id="locL-${where}">Where are you practising?</span><div class="chips" role="group" aria-labelledby="locL-${where}">${Object.entries(LOCS).map(([k,l])=>`<button type="button" class="chip" data-act="loc" data-loc="${k}" aria-pressed="${S.loc===k}">${l.name}</button>`).join("")}</div></div>`;
+    h+=`<div class="opt-group"><span class="len-l" id="lenL-${where}">Session length</span><div class="seg" role="group" aria-labelledby="lenL-${where}">${LENS.map(m=>`<button type="button" data-act="len" data-len="${m}" aria-pressed="${S.len===m}">${m} min</button>`).join("")}</div></div>`;
+  }
+  h+=`<p class="meta mono">${sess.items.length} drills · about ${minsOf(sess.items)} min</p><ol class="ex-list">${sess.items.map(it=>exRow(it)).join("")}</ol>`;
+  h+=`<button type="button" class="cta" data-act="start" data-sess="${sess.key}">${ICON.play}${done?"Do it again":"Start session"}</button>`;
+  if(where==="plan")h+=`<div class="under"><button type="button" class="link-btn" data-act="toggle" data-day="${sess.n}">${done?"Untick this session":"Mark as done"}</button></div>`;
+  return h+"</section>";
+}
+
+/* ---------- Screens ---------- */
+let selDay=nextSession()||SESSIONS;
+const heroDrill={id:"hero",anim:{s:"full",set:"driver",props:[],hl:["club"]}};
+const heroAnim={svg:null,ex:heroDrill,t0:0};
+
+function renderToday(){
+  const s=scores(),ov=overallOf(s),nd=nextSession(),wk=thisWeek(),tc=testedCount();
+  const dateStr=new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"});
+  let h=`<header class="top"><div><p class="eyebrow">${ACC.me&&ACC.me.name?"Hi "+esc(ACC.me.name.split(" ")[0])+" · ":""}${dateStr}</p><h1>Today</h1></div>${wk?`<span class="streak" title="Sessions this week">${ICON.flag}<b>${wk}</b>this week</span>`:""}</header>`;
+  if(ACC.readOnly)h+=`<p class="warn-note">Your progress is only being saved on this device. To save it to your account, ask the person who shared Range Golf with you to give you edit access.</p>`;
+  if(ACC.full)h+=`<p class="warn-note">Storage is full, so progress is only being saved on this device for now.</p>`;
+  if(!tc){
+    h+=`<section class="card hero"><div><p class="kicker">Skills test</p><h2 class="h2">Test your game</h2><p>Four short tests: putting, wedges, irons and driver. Do any of them on your next range visit. Each takes about 10 minutes.</p><button type="button" class="cta" data-act="test">Start a test</button><p class="fine">Until then you'll get a balanced plan.</p></div><svg class="fig hero-fig" id="heroFig" viewBox="56 18 150 152" aria-hidden="true"></svg></section>`;
+  }else{
+    const rk=ranked().filter(a=>s[a]!=null);
+    h+=`<section class="card score-card">${ringBox(ov,"",`data-tab="progress" aria-label="Skill score ${ov} out of 100. Open progress."`)}<div class="sc-txt"><p class="kicker">Skill score</p><p>${rk.length>1&&s[rk[0]]===s[rk[1]]?`Weakest: <b>${areaName(rk[0])}</b> and <b>${areaName(rk[1])}</b>`:`Weakest: <b>${areaName(rk[0])}</b>`}${tc>1?` · Strongest: <b>${areaName(rk[rk.length-1])}</b>`:""}</p><p class="fine">${tc} of 4 areas tested · <button type="button" class="link-btn" data-act="test">${tc<4?"Test another":"Retest"}</button></p></div></section>`;
+  }
+  const last=S.log.filter(l=>l.kind==="plan").pop();
+  if(last&&dayKey(last.t)===dayKey(Date.now())&&nd!==null)h+=`<p class="done-note">${ICON.check}Today's practice is done. The next session is ready whenever you are.</p>`;
+  if(nd===null){
+    h+=`<section class="card"><p class="kicker">Practice plan</p><h2 class="h2">All 12 sessions done</h2><p>Retest each area to see how your game has moved, then start another four weeks built from the new results.</p><div class="btn-row"><button type="button" class="btn primary" data-act="test">Retest my game</button><button type="button" class="btn" data-act="newround">Start another 4 weeks</button></div></section>`;
+  }else h+=sessCard(practicePlan(nd),"today");
+  if(coachOn()||(COACH.fn&&S.log.length>=2&&(!S.coach||Date.now()-S.coach.t>6*DAY_MS)))h+=coachCard();
+  h+=`<section class="block"><h3 class="h3">Quick sessions</h3><div class="tiles">${Object.keys(QUICK).map(k=>{const ss=quickSession(k);return `<button type="button" class="tile" data-act="preview" data-sess="quick:${k}"><span class="kicker">${esc(ss.kicker)}</span><span class="tl-name">${ss.title}</span><span class="tl-meta mono">${minsOf(ss.items)} min · ${ss.items.length} drills</span><span class="tl-figs">${ss.items.slice(0,3).map(it=>golfThumb(DR[it.id])).join("")}</span></button>`;}).join("")}</div></section>`;
+  h+=`<section class="block"><h3 class="h3">Target an area</h3><div class="area-grid">${AREAS.map(a=>{const ss=targetSession(a.id),v=s[a.id];return `<button type="button" class="area-tile" data-act="preview" data-sess="target:${a.id}" style="--c:${lvColor(v)}"><span class="at-name">${a.name}</span>${v!=null?`<span class="track"><span class="fill" style="width:${v}%"></span></span>`:""}<span class="at-meta mono">${v!=null?lvName(v)+" · ":""}${minsOf(ss.items)} min</span></button>`;}).join("")}</div></section>`;
+  $("tab-today").innerHTML=h;
+  const hf=$("heroFig");
+  if(hf){heroAnim.svg=hf;heroAnim.t0=performance.now();heroAnim.key=null;anims.add(heroAnim);drawAnim(heroAnim,performance.now());}
+  else anims.delete(heroAnim);
+}
+
+function renderPlan(){
+  const nd=nextSession();
+  let h=`<header class="top"><div><p class="eyebrow">4-week practice plan${S.round>1?` · round ${S.round}`:""}</p><h1>Plan</h1></div><div class="stat"><b>${doneCount()}/${SESSIONS}</b><span>sessions</span></div></header>`;
+  h+=`<p class="lede">Three sessions a week. ${testedCount()?"Each one works on two areas picked from your tests, and your weakest area comes up most often.":"Each one works on two areas. Take a skills test and the plan shifts towards your weakest areas."} Drills move from technique to control to pressure games as the weeks go on.</p>`;
+  h+=`<div class="weeks">`;
+  WEEKS.forEach((w,wi)=>{
+    h+=`<div class="week"><div class="week-head"><span class="wk">Week ${wi+1}</span><span class="wn">${w.name} · ${w.note}</span></div><div class="days">`;
+    for(let n=wi*3+1;n<=wi*3+3;n++){
+      const [f1,f2]=focusOf(n),cls=["day"];
+      if(isDone(n))cls.push("done");if(n===nd)cls.push("next");if(n===selDay)cls.push("sel");
+      h+=`<button type="button" class="${cls.join(" ")}" data-act="day" data-day="${n}" aria-pressed="${n===selDay}" aria-label="Session ${n}, ${areaName(f1)} and ${areaName(f2)}${isDone(n)?", done":""}${n===nd?", up next":""}"><span class="dn">${n}</span><span class="dt">${isDone(n)?"Done":areaShort(f1)+" + "+areaShort(f2)}</span></button>`;
+    }
+    h+="</div></div>";
+  });
+  h+="</div>"+sessCard(practicePlan(selDay),"plan");
+  $("tab-plan").innerHTML=h;
+}
+
+function renderLibrary(){
+  let h=`<header class="top"><div><p class="eyebrow">${Object.keys(DR).length} drills · tap for a demo</p><h1>Drills</h1></div></header>`;
+  AREAS.forEach(a=>{
+    const list=Object.values(DR).filter(d=>d.area===a.id);
+    h+=`<section class="block"><h3 class="h3">${a.name}</h3><ol class="ex-list lib">${list.map(d=>exRow({id:d.id,dur:d.dur},`${d.dur} min · ${d.loc.map(l=>LOC_LABEL[l]).join(" or ")}`)).join("")}</ol></section>`;
+  });
+  $("tab-library").innerHTML=h;
+}
+
+let resetAsk=false;
+function voiceSummary(){
+  if(!canSpeak)return "Voice coaching isn't available in this browser.";
+  if(!S.voice)return "Off. Follow the cues on screen.";
+  const r=(RATES.find(x=>x[0]===S.rate)||RATES[1])[1];
+  return `${voice?esc(voice.name.replace(/\s*\(.*\)$/,""))+", "+accentOf(voice.lang)+" · ":""}${r} speed · ${S.detail==="short"?"Short cues":"Full instructions"}`;
+}
+function storageNote(){
+  if(ACC.mode==="account")return "Saved to your Claude account, so it follows you to any device you sign in on. Only you can see your results.";
+  if(ACC.readOnly)return "Saved on this device only, and only you can see it. Ask the person who shared Range Golf with you for edit access to save it to your account.";
+  return "Saved on this device only. Nobody else can see your results.";
+}
+function renderProgress(){
+  const s=scores(),ov=overallOf(s),f=firstScores(),tc=testedCount();
+  const anyRetest=AREAS.some(a=>S.tests.filter(t=>t.area===a.id).length>1);
+  let h=`<header class="top"><div><p class="eyebrow">Your game</p><h1>Progress</h1></div></header>`;
+  if(!tc){
+    h+=`<section class="card hero" style="grid-template-columns:1fr"><div><p class="kicker">No scores yet</p><h2 class="h2">Take a skills test</h2><p>Each test gives you a score for that part of your game. Retest after the four weeks to see what's changed.</p><button type="button" class="cta" data-act="test">Start a test</button></div></section>`;
+  }else{
+    const fo=overallOf(f),d=ov-fo;
+    h+=`<section class="card block"><div class="score-big">${ringBox(ov,"lg")}<div class="sc-txt"><p class="kicker">Skill score</p>${anyRetest?`<p class="delta${d<0?" neg":""}">${d>=0?"+":""}${d}</p><p class="fine">since your first tests</p>`:`<p class="fine">Based on ${tc} of 4 areas. Retest after the four weeks to track your progress.</p>`}</div></div>
+      ${areaBars(s,anyRetest?f:null)}${anyRetest?`<p class="legend"><i></i>Marker shows your first test</p>`:""}
+      <button type="button" class="btn" data-act="test">${tc<4?"Test another area":"Retest an area"}</button></section>`;
+  }
+  const mins=Math.round(S.log.reduce((a,l)=>a+(l.secs||0),0)/60);
+  h+=`<div class="stats"><div><b>${S.log.length}</b><span>sessions</span></div><div><b>${mins}</b><span>minutes</span></div><div><b>${thisWeek()}</b><span>this week</span></div></div>`;
+  const set=new Set(S.log.map(l=>dayKey(l.t))),now=new Date();now.setHours(0,0,0,0);
+  const start=new Date(now);start.setDate(now.getDate()-((now.getDay()+6)%7)-21);
+  let active=0,cal="";
+  for(let i=0;i<28;i++){const d=new Date(start);d.setDate(start.getDate()+i);const on=set.has(dayKey(d)),fut=d>now;if(on)active++;cal+=`<span class="cal-d${on?" on":""}${fut?" fut":""}${+d===+now?" today":""}">${d.getDate()}</span>`;}
+  h+=`<section class="block"><h3 class="h3">Last 4 weeks</h3><div class="cal" role="img" aria-label="${active} practice days in the last four weeks">${"MTWTFSS".split("").map(c=>`<span class="cal-h" aria-hidden="true">${c}</span>`).join("")}${cal}</div></section>`;
+  if(S.tests.length)h+=`<section class="block"><h3 class="h3">Tests</h3><ul class="hist card" style="padding-block:6px">${S.tests.slice().reverse().map(x=>`<li><span>${areaName(x.area)} · ${new Date(x.t).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})}</span><b>${x.score}</b></li>`).join("")}</ul></section>`;
+  h+=coachCard();
+  h+=`<section class="card vsum"><div><p class="kicker">Voice coach</p><p>${voiceSummary()}</p></div><button type="button" class="btn" data-act="voice">Change</button></section>`;
+  h+=`<p class="note">${storageNote()}</p>`;
+  h+=`<div class="confirm">${resetAsk?`<span>Clear your tests, sessions and plan progress?</span><button type="button" class="btn danger" data-act="resetyes">Clear everything</button><button type="button" class="btn" data-act="resetno">Cancel</button>`:`<button type="button" class="link-btn" data-act="reset">Reset all data</button>`}</div>`;
+  $("tab-progress").innerHTML=h;
+}
+function renderAll(){renderToday();renderPlan();renderLibrary();renderProgress();}
+let tab="today";
+function go(name,keepScroll){
+  tab=name;
+  ["today","plan","library","progress"].forEach(n=>{$("tab-"+n).hidden=n!==name;});
+  document.querySelectorAll(".tab").forEach(b=>{if(b.dataset.tab===name)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");});
+  if(!keepScroll)window.scrollTo(0,0);
+}
+
+/* ---------- Sheets ---------- */
+let sheetAnim=null,sheetFrom=null;
+function openSheet(id,opts){
+  const d=DR[id];
+  $("shTarget").textContent=areaName(d.area)+" · "+d.dur+" min";
+  $("shName").textContent=d.name;
+  $("shTags").innerHTML=d.loc.map(l=>`<span>${LOC_LABEL[l]}</span>`).join("")+`<span>${{tech:"Technique",control:"Control",pressure:"Pressure game"}[d.stage]}</span>`;
+  $("shSteps").innerHTML=d.steps.map(s=>`<li>${esc(s)}</li>`).join("");
+  $("shCue").textContent=d.cue;
+  $("shKit").textContent="You need: "+d.kit+". "+d.reps.charAt(0).toUpperCase()+d.reps.slice(1)+".";
+  $("shVidBox").hidden=true;$("shVidBox").innerHTML="";
+  $("shVidBtn").hidden=!(EMBED&&d.vid);$("shVidLink").hidden=EMBED&&!!d.vid;
+  $("shVidLink").href=watchURL(d);$("shVidLink").innerHTML=ICON.ext+(d.vid?"Watch tutorial":"Find videos on YouTube");
+  $("shVidCap").innerHTML=d.vid?`Tutorial: ${esc(d.vt)} · <a href="${ytURL(d)}" target="_blank" rel="noopener">More videos</a>`:"";
+  if(opts&&opts.video&&EMBED&&d.vid)playVideo(d);
+  $("shTalk").hidden=!canSpeak;$("shTalk").dataset.ex=id;
+  $("shTry").dataset.sess="single:"+id;$("shTry").hidden=!!P.open;
+  sheetFrom=document.activeElement;
+  $("sheet").hidden=false;
+  if(sheetAnim)anims.delete(sheetAnim);
+  sheetAnim={svg:$("shFig"),ex:d,t0:performance.now()};
+  anims.add(sheetAnim);drawAnim(sheetAnim,performance.now());
+  $("shClose").focus();
+}
+function playVideo(d){
+  const box=$("shVidBox");
+  box.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(d.vid)}?rel=0&modestbranding=1&playsinline=1&autoplay=1" title="YouTube tutorial: ${esc(d.vt)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+  box.hidden=false;$("shVidBtn").hidden=true;
+  $("shVidCap").innerHTML=`Tutorial: ${esc(d.vt)} · <a href="${watchURL(d)}" target="_blank" rel="noopener">Open on YouTube</a> · <a href="${ytURL(d)}" target="_blank" rel="noopener">More videos</a>`;
+  box.scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+function closeSheet(){
+  $("shVidBox").innerHTML="";$("shVidBox").hidden=true;
+  $("sheet").hidden=true;
+  if(sheetAnim){anims.delete(sheetAnim);sheetAnim=null;}
+  if(!P.open||P.paused)hush();
+  if(sheetFrom&&sheetFrom.focus&&sheetFrom.isConnected)try{sheetFrom.focus();}catch(e){}
+}
+let sessFrom=null;
+function openSess(key){
+  const ss=sessFromKey(key);
+  $("ssKicker").textContent=ss.kicker;
+  $("ssTitle").textContent=ss.title;
+  $("ssMeta").textContent=`${ss.items.length} drills · about ${minsOf(ss.items)} min${ss.loc?" · "+LOCS[ss.loc].name:""}`;
+  $("ssList").innerHTML=ss.items.map(it=>exRow(it)).join("");
+  $("ssStart").dataset.sess=key;
+  $("ssStart").innerHTML=ICON.play+"Start";
+  sessFrom=document.activeElement;
+  $("sessSheet").hidden=false;$("ssClose").focus();
+}
+function closeSess(){$("sessSheet").hidden=true;if(sessFrom&&sessFrom.focus&&sessFrom.isConnected)try{sessFrom.focus();}catch(e){}}
+function closeAllSheets(){if(!$("sheet").hidden)closeSheet();if(!$("sessSheet").hidden)closeSess();}
+$("shClose").innerHTML=ICON.close;$("ssClose").innerHTML=ICON.close;$("vsClose").innerHTML=ICON.close;
+$("shVidBtn").innerHTML=ICON.play+"Watch tutorial";
+$("shVidBtn").addEventListener("click",()=>{const d=DR[$("shTalk").dataset.ex];if(d){hush();playVideo(d);}});
+$("shTalk").innerHTML=ICON.speak+"Talk me through it";
+$("shTry").innerHTML=ICON.play+"Try this drill";
+$("shClose").addEventListener("click",closeSheet);
+$("ssClose").addEventListener("click",closeSess);
+$("sheet").addEventListener("click",e=>{if(e.target===$("sheet"))closeSheet();});
+$("sessSheet").addEventListener("click",e=>{if(e.target===$("sessSheet"))closeSess();});
+$("shTalk").addEventListener("click",()=>{const d=DR[$("shTalk").dataset.ex];say(`${d.name}. ${d.reps}. ${d.steps.join(" ")} ${d.cue}`,true,true);});
+
+/* ---------- Voice coach settings ---------- */
+const PREVIEW="Smooth back, then let it go. Hold your finish.";
+let vsFrom=null,vsResume=false;
+function renderVoiceSheet(){
+  if(!canSpeak){$("vsBody").innerHTML=`<p class="note">This browser can't speak, so Range Golf shows the coaching on screen instead. The countdown beeps still work.</p>`;return;}
+  const vs=englishVoices(),cur=voice&&voice.name;
+  let h=`<div class="vs-row"><span class="len-l" id="vsOnL">Voice coaching</span><div class="seg s2" role="group" aria-labelledby="vsOnL"><button type="button" data-vs="on" aria-pressed="${S.voice}">On</button><button type="button" data-vs="off" aria-pressed="${!S.voice}">Off</button></div></div>`;
+  h+=`<div class="vs-row"><span class="len-l" id="vsRateL">Speed</span><div class="seg s3" role="group" aria-labelledby="vsRateL">${RATES.map(([r,n])=>`<button type="button" data-rate="${r}" aria-pressed="${S.rate===r}">${n}</button>`).join("")}</div></div>`;
+  h+=`<div class="vs-row"><span class="len-l" id="vsDetL">How much it says</span><div class="seg s2" role="group" aria-labelledby="vsDetL"><button type="button" data-detail="full" aria-pressed="${S.detail!=="short"}">Full instructions</button><button type="button" data-detail="short" aria-pressed="${S.detail==="short"}">Short cues</button></div></div>`;
+  h+=`<div class="vs-row"><span class="len-l">Voice · tap to hear it</span>`;
+  h+=vs.length?`<ul class="voices">${vs.map(v=>`<li><button type="button" class="vrow" data-vname="${esc(v.name)}" aria-pressed="${v.name===cur}"><span class="vn">${esc(v.name)}</span><span class="va">${accentOf(v.lang)}</span>${ICON.speak}</button></li>`).join("")}</ul>`:`<p class="note">No English voices found on this device yet. They can take a moment to load, so try reopening this panel.</p>`;
+  h+=`</div><p class="note">The voices come from this phone or computer, so the list is different on each device. Most phones let you download more natural-sounding voices in their accessibility settings.</p>`;
+  $("vsBody").innerHTML=h;
+}
+function openVoiceSheet(){
+  pickVoice();renderVoiceSheet();vsResume=false;
+  if(P.open&&!P.done&&!P.paused){togglePause();vsResume=true;}
+  vsFrom=document.activeElement;$("voiceSheet").hidden=false;$("vsClose").focus();
+}
+function closeVoiceSheet(){
+  $("voiceSheet").hidden=true;hush();
+  if(vsResume&&P.open&&!P.done&&P.paused)togglePause();
+  vsResume=false;syncToggles();renderProgress();
+  if(vsFrom&&vsFrom.focus&&vsFrom.isConnected)try{vsFrom.focus();}catch(e){}
+}
+$("vsClose").addEventListener("click",closeVoiceSheet);
+$("voiceSheet").addEventListener("click",e=>{
+  if(e.target===$("voiceSheet")){closeVoiceSheet();return;}
+  const b=e.target.closest("button");if(!b)return;
+  if(b.dataset.vs){S.voice=b.dataset.vs==="on";save();if(S.voice)say(PREVIEW,true);else hush();renderVoiceSheet();return;}
+  if(b.dataset.rate){S.rate=+b.dataset.rate;save();say(PREVIEW,true,true);renderVoiceSheet();return;}
+  if(b.dataset.detail){S.detail=b.dataset.detail;save();renderVoiceSheet();return;}
+  if(b.dataset.vname!=null){S.vname=b.dataset.vname;save();pickVoice();say(PREVIEW,true,true);renderVoiceSheet();const sel=$("vsBody").querySelector(".vrow[aria-pressed=true]");if(sel)sel.focus();}
+});
+
+/* ---------- Global clicks ---------- */
+document.addEventListener("click",e=>{
+  if(e.target.closest("#player,#testView,#voiceSheet"))return;
+  const tb=e.target.closest("[data-tab]");if(tb){closeAllSheets();go(tb.dataset.tab);return;}
+  const exb=e.target.closest("[data-ex]");if(exb){openSheet(exb.dataset.ex);return;}
+  const b=e.target.closest("[data-act]");if(!b)return;
+  switch(b.dataset.act){
+    case "test":closeAllSheets();startTest();break;
+    case "voice":openVoiceSheet();break;
+    case "start":closeAllSheets();startSession(sessFromKey(b.dataset.sess));break;
+    case "preview":openSess(b.dataset.sess);break;
+    case "len":S.len=+b.dataset.len;save();renderToday();renderPlan();break;
+    case "loc":S.loc=b.dataset.loc;save();renderToday();renderPlan();break;
+    case "day":selDay=+b.dataset.day;renderPlan();break;
+    case "toggle":{const n=+b.dataset.day;if(isDone(n))delete S.done[n];else S.done[n]=Date.now();save();renderAll();break;}
+    case "newround":S.done={};S.round=(S.round||1)+1;selDay=1;save();renderAll();break;
+    case "reset":resetAsk=true;renderProgress();break;
+    case "resetno":resetAsk=false;renderProgress();break;
+    case "resetyes":S.tests=[];S.done={};S.log=[];S.round=1;S.load=0;S.shaky={};S.coach=null;S.goals=[];resetAsk=false;selDay=1;save();renderAll();break;
+    case "goal":{const g=b.dataset.goal;if(!g)S.goals=[];else if(S.goals.includes(g))S.goals=S.goals.filter(x=>x!==g);else{S.goals=[...S.goals,g];if(S.goals.length>2)S.goals=S.goals.slice(-2);}save();renderToday();renderPlan();break;}
+    case "coach":runCoach();break;
+    case "coachstop":if(COACH.ctl)COACH.ctl.abort();break;
+    case "coachundo":if(S.coach){S.load=S.coach.prevLoad;S.coach=null;save();renderAll();}break;
+  }
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){if(!$("voiceSheet").hidden){closeVoiceSheet();return;}if(!$("sheet").hidden){closeSheet();return;}if(!$("sessSheet").hidden){closeSess();return;}}
+  if(P.open&&!P.done&&$("sheet").hidden&&e.key===" "&&!/^(BUTTON|A|INPUT)$/.test((e.target||{}).tagName||"")){e.preventDefault();togglePause();}
+});
+
+/* ---------- Skills test ---------- */
+const TV={area:null,ans:[null,null],res:null};
+const tv=$("testView");
+let testAnim=null;
+function startTest(area){
+  ensureAudio();pickVoice();
+  TV.area=area||null;TV.ans=[null,null];TV.res=null;
+  tv.hidden=false;document.body.style.overflow="hidden";
+  renderTest(true);
+}
+function renderTest(speak){
+  if(testAnim){anims.delete(testAnim);testAnim=null;}
+  const topBar=(label)=>`<div class="pl-top"><button class="icon-btn" type="button" data-tact="close" aria-label="Close the test">${ICON.close}</button><div class="pl-prog"><span class="lbl">${label}</span></div>${TV.area&&!TV.res?`<button class="icon-btn" type="button" data-tact="speak" aria-label="Read the instructions aloud">${ICON.speak}</button>`:""}</div>`;
+  if(TV.res){
+    const {area,score,prev}=TV.res,rk=ranked();
+    tv.innerHTML=`<div class="pl-wrap res">${topBar("Skills test")}
+      <div class="res-top"><p class="kicker">${areaName(area)} score</p>${ringBox(score,"xl")}<p class="h3" style="color:${lvColor(score)}">${lvName(score)}</p>${prev?`<p class="delta${score-prev.score<0?" neg":""}">${score-prev.score>=0?"+":""}${score-prev.score} since your last test</p>`:""}</div>
+      ${areaBars(scores(),null)}
+      <p>Your practice plan now leans towards <b>${areaName(rk[0])}</b> and <b>${areaName(rk[1])}</b>.${testedCount()<4?" Untested areas count as average until you test them.":""}</p>
+      <div class="btn-row"><button class="btn" type="button" data-tact="another">Test another area</button></div>
+      <button class="cta" type="button" data-tact="done">See today's practice</button></div>`;
+    if(speak)say(`Your ${areaName(area).toLowerCase()} score is ${score}. ${lvName(score)}.`,true);
+    return;
+  }
+  if(!TV.area){
+    tv.innerHTML=`<div class="pl-wrap">${topBar("Skills test")}
+      <div class="t-head"><p class="kicker">Skills test</p><h2>Test your game</h2></div>
+      <p>Pick an area. Each test takes about 10 minutes at the range or practice green, so do them whenever you're there, in any order.</p>
+      <div class="pick">${AREAS.map(a=>{const t=latest(a.id);return `<button type="button" data-tarea="${a.id}"><span class="pn">${a.name}</span><span class="pw">${TESTS[a.id].where} · 2 short tests</span><span class="ps">${t?`<b>${t.score}</b>${shortDate(t.t)}`:"Not tested"}</span></button>`;}).join("")}</div></div>`;
+    tv.scrollTop=0;return;
+  }
+  const T=TESTS[TV.area],ready=TV.ans.every(x=>x!=null);
+  tv.innerHTML=`<div class="pl-wrap">${topBar(T.name)}
+    <div class="t-head"><p class="kicker">${T.where}</p><h2>${T.name}</h2></div>
+    <div class="t-fig"><svg class="fig" id="tFig" viewBox="0 0 260 170" aria-hidden="true"></svg></div>
+    ${T.q.map((q,qi)=>`<div class="t-q"><h3>${qi+1}. ${q.name}</h3><p>${q.how}</p><p class="ask" id="tq${qi}">${q.ask}</p><div class="opts" role="radiogroup" aria-labelledby="tq${qi}">${q.opts.map((o,oi)=>`<button type="button" class="opt" role="radio" aria-checked="${TV.ans[qi]===oi}" data-q="${qi}" data-o="${oi}"><b>${oi+1}</b><span>${o}</span></button>`).join("")}</div></div>`).join("")}
+    <div class="btn-row" style="display:grid;grid-template-columns:1fr 2fr"><button class="btn" type="button" data-tact="back">Back</button><button class="btn primary" type="button" data-tact="save"${ready?"":" disabled"}>Save my score</button></div></div>`;
+  testAnim={svg:$("tFig"),ex:{id:"t_"+TV.area,anim:T.anim},t0:performance.now()};anims.add(testAnim);drawAnim(testAnim,performance.now());
+  tv.scrollTop=0;
+  if(speak)say(`${T.name}. First, ${T.q[0].name.toLowerCase()}. ${T.q[0].how} ${T.q[0].ask}`,true);
+}
+function closeTest(){hush();if(testAnim){anims.delete(testAnim);testAnim=null;}tv.hidden=true;tv.innerHTML="";document.body.style.overflow="";renderAll();}
+tv.addEventListener("click",e=>{
+  const ta=e.target.closest("[data-tarea]");if(ta){TV.area=ta.dataset.tarea;TV.ans=[null,null];renderTest(true);return;}
+  const o=e.target.closest("[data-o]");
+  if(o){const qi=+o.dataset.q;TV.ans[qi]=+o.dataset.o;
+    o.parentElement.querySelectorAll(".opt").forEach(b=>b.setAttribute("aria-checked",String(b===o)));
+    tv.querySelector("[data-tact=save]").disabled=!TV.ans.every(x=>x!=null);beep(740,.06,.12);
+    if(qi===0&&TV.ans[1]==null){const q=TESTS[TV.area].q[1];say(`Next, ${q.name.toLowerCase()}. ${q.how} ${q.ask}`,true);}
+    return;}
+  const b=e.target.closest("[data-tact]");if(!b)return;
+  const a=b.dataset.tact;
+  if(a==="close"){closeTest();return;}
+  if(a==="speak"){const T=TESTS[TV.area];if(T)say(T.q.map(q=>`${q.name}. ${q.how} ${q.ask}`).join(" "),true,true);return;}
+  if(a==="back"){TV.area=null;renderTest(false);return;}
+  if(a==="another"){TV.area=null;TV.res=null;renderTest(false);return;}
+  if(a==="save"){
+    const prev=latest(TV.area),score=Math.round(TV.ans.reduce((s,v)=>s+LEVEL_SCORE[v],0)/TV.ans.length);
+    S.tests.push({t:Date.now(),area:TV.area,lv:TV.ans.slice(),score});save();
+    TV.res={area:TV.area,score,prev};renderTest(true);return;
+  }
+  if(a==="done"){closeTest();selDay=nextSession()||SESSIONS;go("today");}
+});
+
+/* ---------- Player ---------- */
+const el={};
+["player","plClose","plCount","plSegs","plVoice","plSound","endBar","endYes","endNo","voiceNote","plLive","plTarget","plName","plFig","ticks","ringFg","plPhase","plSec","plUnit","plReady","plCue","plPrev","plPlay","plNext","plYT","plHow","plNextName","plDone","dnKicker","dnMeta","dnNext","dnBack","dnRetest","dnMark","dnCheck"].forEach(id=>el[id]=$(id));
+const RC=2*Math.PI*82;
+const f2=n=>Math.round(n*10)/10;
+el.ringFg.style.strokeDasharray=RC.toFixed(2);
+(function ticks(){let s="";for(let i=0;i<60;i++){const maj=i%5===0,a=i*6*Math.PI/180,r1=maj?91:94,r2=98;s+=`<line class="tick${maj?" maj":""}" x1="${f2(100+r1*Math.sin(a))}" y1="${f2(100-r1*Math.cos(a))}" x2="${f2(100+r2*Math.sin(a))}" y2="${f2(100-r2*Math.cos(a))}"/>`;}el.ticks.innerHTML=s;})();
+el.plClose.innerHTML=ICON.close;el.plVoice.innerHTML=ICON.voice;el.plSound.innerHTML=ICON.sound;
+el.plPrev.innerHTML=ICON.prev;el.plNext.innerHTML=ICON.next;
+el.plYT.innerHTML=(EMBED?ICON.play:ICON.ext)+"Watch tutorial";
+
+const P={open:false};
+const plAnim={svg:el.plFig,ex:DR.gate,t0:0};
+function buildPhases(items){
+  const ph=[];
+  items.forEach((it,i)=>{const d=DR[it.id];ph.push({type:"prep",d,idx:i,dur:i===0?PREP_FIRST:PREP},{type:"work",d,idx:i,dur:it.dur*60});});
+  return ph;
+}
+function syncToggles(){
+  el.plVoice.setAttribute("aria-pressed",String(!!S.voice&&canSpeak));
+  el.plSound.setAttribute("aria-pressed",String(!!S.sound));
+  el.voiceNote.hidden=canSpeak;
+}
+el.plVoice.addEventListener("click",()=>openVoiceSheet());
+el.plSound.addEventListener("click",()=>{S.sound=!S.sound;save();syncToggles();ensureAudio();if(S.sound)beep(880,.08);});
+function startSession(sess){
+  if(!sess||!sess.items.length)return;
+  ensureAudio();pickVoice();
+  Object.assign(P,{open:true,done:false,sess,phases:buildPhases(sess.items),paused:false,started:performance.now(),pausedTotal:0});
+  el.player.hidden=false;el.plLive.hidden=false;el.plDone.hidden=true;el.endBar.hidden=true;
+  document.body.style.overflow="hidden";
+  syncToggles();
+  el.plSegs.innerHTML=sess.items.map(()=>"<i></i>").join("");
+  anims.add(plAnim);
+  enterPhase(0,performance.now());
+  updatePlay();requestWake();
+  el.player.scrollTop=0;
+}
+const fmt=sec=>sec>=60?Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0"):String(sec);
+function phaseLabel(ph){return ph.type==="prep"?"Set up":"Practise";}
+function enterPhase(i,now){
+  P.i=i;P.t0=now;P.fired=new Set();P.lastSec=null;
+  const ph=P.phases[i],d=ph.d,items=P.sess.items;
+  el.player.dataset.phase=ph.type==="work"?"work":"prep";
+  el.plTarget.textContent=`${areaName(d.area)} · ${d.reps}`;
+  el.plName.textContent=d.name;
+  el.plCount.textContent=`${P.sess.title} · ${ph.idx+1} of ${items.length}`;
+  [...el.plSegs.children].forEach((s,j)=>{s.className=j<ph.idx?"on":j===ph.idx?"cur":"";});
+  el.plPhase.textContent=phaseLabel(ph);
+  el.plSec.textContent=fmt(ph.dur);el.plUnit.textContent=ph.dur>=60?"min left":"seconds";
+  el.ringFg.style.strokeDashoffset="0";
+  el.plReady.classList.toggle("off",ph.type!=="prep");
+  el.plYT.href=watchURL(d);
+  const nx=items[ph.idx+1];
+  el.plNextName.textContent=nx?`Next: ${DR[nx.id].name}`:"Last drill";
+  if(ph.type==="prep")el.plCue.innerHTML=`<ol class="mini-steps">${d.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol><span class="tgt">You need: ${esc(d.kit)}</span>`;
+  else el.plCue.innerHTML=`<p>${esc(d.cue)}</p><span class="tgt">${esc(d.reps.charAt(0).toUpperCase()+d.reps.slice(1))}</span>`;
+  plAnim.ex=d;plAnim.t0=now;plAnim.paused=false;plAnim.key=null;drawAnim(plAnim,now);
+  if(ph.type==="prep"){const lead=ph.idx===0?"Let's start with":"Next,";say(S.detail==="short"?`${lead} ${d.name}. ${d.cue}`:`${lead} ${d.name}. ${d.reps}. ${d.steps.join(" ")}`,true);}
+  else{beep(1175,.28,.22);const m=Math.round(ph.dur/60);say(`Go. ${m} minute${m===1?"":"s"}.`,true);}
+}
+function tickPlayer(now){
+  if(P.paused||P.done)return;
+  const ph=P.phases[P.i],rem=ph.dur-(now-P.t0)/1000;
+  if(rem<=0){advance(now);return;}
+  const sec=Math.ceil(rem);
+  el.ringFg.style.strokeDashoffset=(RC*(1-rem/ph.dur)).toFixed(2);
+  if(sec!==P.lastSec){
+    P.lastSec=sec;el.plSec.textContent=fmt(sec);el.plUnit.textContent=sec>=60?"min left":"seconds";
+    if(sec<=3)beep(ph.type==="work"?880:620,.1);
+    if(ph.type==="work"){
+      if(S.detail!=="short"&&ph.dur>=240&&sec===Math.round(ph.dur/2)&&!P.fired.has("mid")){P.fired.add("mid");say(ph.d.cue,false);}
+      if(ph.dur>=180&&sec===60&&!P.fired.has("one")){P.fired.add("one");say("One minute left.",true);}
+    }
+  }
+}
+function advance(now){if(P.i+1<P.phases.length)enterPhase(P.i+1,now);else finish();}
+const prepOf=idx=>P.phases.findIndex(p=>p.idx===idx&&p.type==="prep");
+function jump(j){const now=performance.now();if(P.paused){P.pausedTotal+=now-P.pausedAt;P.paused=false;updatePlay();}enterPhase(j,now);}
+function togglePause(){
+  if(!P.open||P.done)return;
+  const now=performance.now();
+  if(P.paused){const d=now-P.pausedAt;P.t0+=d;plAnim.t0+=d;P.pausedTotal+=d;P.paused=false;plAnim.paused=false;ensureAudio();requestWake();say("Back to it.",true);}
+  else{P.paused=true;P.pausedAt=now;plAnim.paused=true;hush();}
+  updatePlay();
+}
+function updatePlay(){
+  el.plPlay.innerHTML=P.paused?ICON.play:ICON.pause;
+  el.plPlay.setAttribute("aria-label",P.paused?"Resume":"Pause");
+  if(P.paused)el.plPhase.textContent="Paused";
+  else if(P.phases&&P.phases[P.i])el.plPhase.textContent=phaseLabel(P.phases[P.i]);
+}
+function finish(){
+  P.done=true;anims.delete(plAnim);releaseWake();
+  const sess=P.sess,secs=Math.round((performance.now()-P.started-P.pausedTotal)/1000),stamp=Date.now();
+  S.log.push({t:stamp,kind:sess.kind,secs});
+  P.ck=sess.kind==="single"?null:{t:stamp,feel:null,shaky:null,load0:S.load,shaky0:Object.assign({},S.shaky)};
+  renderCheck();
+  if(sess.kind==="plan")S.done[sess.n]=Date.now();
+  save();
+  el.plLive.hidden=true;el.plDone.hidden=false;el.endBar.hidden=true;
+  el.dnKicker.textContent=sess.kind==="plan"?`Session ${sess.n} · Practice plan`:`${sess.title}`;
+  el.dnMeta.textContent=`${sess.items.length} drill${sess.items.length>1?"s":""} · ${Math.floor(secs/60)}:${String(secs%60).padStart(2,"0")}`;
+  const nd=nextSession();let next="";
+  if(sess.kind==="plan"){
+    if(nd){const [f1,f2]=focusOf(nd);next=`Next up: session ${nd}, working on ${areaName(f1).toLowerCase()} and ${areaName(f2).toLowerCase()}.`;}
+    else next="That's all 12 sessions. Retest each area to see how your game has moved.";
+  }else if(sess.kind==="quick"&&sess.q==="warm")next="You're warmed up. Have a good round.";
+  else if(sess.kind==="quick")next="Putting tune-up done. Trust your stroke out there.";
+  else next="Nice work. Your next practice session is waiting on the Today tab.";
+  el.dnNext.textContent=next;
+  el.dnRetest.hidden=!(sess.kind==="plan"&&!nd);
+  beep(784,.16,.2,0);beep(988,.16,.2,.17);beep(1319,.34,.22,.34);
+  say("Session done. Nice work.",true);
+  el.dnBack.focus();
+}
+/* After-session check-in: shifts the mix of technique and pressure, and leans towards the area that felt shakiest. */
+function applyCheck(){
+  const c=P.ck;if(!c)return;
+  let load=c.load0;if(c.feel==="easy")load++;if(c.feel==="hard")load--;
+  S.load=Math.max(-2,Math.min(2,load));
+  S.shaky=Object.assign({},c.shaky0);if(c.shaky)S.shaky[c.shaky]=Date.now()+7*DAY_MS;
+  const i=S.log.findIndex(l=>l.t===c.t);
+  if(i>=0)S.log[i]=Object.assign({},S.log[i],{feel:c.feel,shaky:c.shaky});
+  save();
+}
+function renderCheck(){
+  const c=P.ck;
+  if(!c){el.dnCheck.hidden=true;el.dnCheck.innerHTML="";return;}
+  let note="";
+  if(c.feel==="easy")note=S.load>c.load0?"Next time: more pressure games and scoring challenges.":"You're already on the toughest setting. A retest will move things on.";
+  else if(c.feel==="hard")note=S.load<c.load0?"Next time: more technique drills and fewer games.":"You're already on the gentlest setting. Try shorter sessions for a while.";
+  else if(c.feel==="right")note="Good. The plan stays as it is.";
+  if(c.shaky)note+=(note?" ":"")+`The next week leans a little more towards ${areaName(c.shaky).toLowerCase()}.`;
+  el.dnCheck.innerHTML=`<p class="kicker">Quick check-in</p><p class="ck-q" id="ckFeelL">How did that feel?</p><div class="seg s3" role="group" aria-labelledby="ckFeelL">${[["easy","Too easy"],["right","About right"],["hard","Too hard"]].map(([k,n])=>`<button type="button" data-feel="${k}" aria-pressed="${c.feel===k}">${n}</button>`).join("")}</div><p class="ck-q" id="ckShL">What felt shakiest today?</p><div class="chips" role="group" aria-labelledby="ckShL">${AREAS.map(a=>`<button type="button" class="chip" data-shaky="${a.id}" aria-pressed="${c.shaky===a.id}">${a.name}</button>`).join("")}</div>${note?`<p class="ck-note">${note}</p>`:""}`;
+  el.dnCheck.hidden=false;
+}
+el.dnCheck.addEventListener("click",e=>{
+  const c=P.ck;if(!c)return;
+  const f=e.target.closest("[data-feel]"),sh=e.target.closest("[data-shaky]");
+  if(f)c.feel=c.feel===f.dataset.feel?null:f.dataset.feel;
+  else if(sh)c.shaky=c.shaky===sh.dataset.shaky?null:sh.dataset.shaky;
+  else return;
+  applyCheck();renderCheck();
+});
+
+/* ---------- Claude coach (only where the page can reach Claude) ---------- */
+const COACH={fn:null,busy:false,err:"",ctl:null};
+const STAGES=["tech","control","pressure"];
+function cleanCoach(o){
+  const ids=new Set(Object.keys(DR)),areas=new Set(AREAS.map(a=>a.id));
+  const arr=(x,ok,n)=>Array.isArray(x)?x.map(String).filter(ok).slice(0,n):[];
+  const t=typeof o.t==="number"?o.t:Date.now();
+  return {t,until:typeof o.until==="number"?o.until:t+7*DAY_MS,summary:String(o.summary||"").slice(0,700),focus:arr(o.focus,a=>areas.has(a),2),
+    stage:STAGES.includes(o.stage)?o.stage:null,load:Math.max(-2,Math.min(2,Math.round(+o.load||0))),favour:arr(o.favour,i=>ids.has(i),4),avoid:arr(o.avoid,i=>ids.has(i),4),
+    tips:arr(o.tips,x=>x.trim().length>0,3).map(x=>x.slice(0,160)),prevLoad:typeof o.prevLoad==="number"?o.prevLoad:0};
+}
+const iso=ts=>new Date(ts).toISOString().slice(0,10);
+function coachPrompt(){
+  const now=Date.now(),areas={};
+  AREAS.forEach(a=>{const f=firstTest(a.id),l=latest(a.id);areas[a.id]={name:a.name,firstScore:f?f.score:null,latestScore:l?l.score:null,latestDate:l?iso(l.t):null,tests:S.tests.filter(t=>t.area===a.id).length};});
+  const data={
+    today:iso(now),
+    plan:{nextSession:nextSession(),sessionsDone:doneCount(),of:SESSIONS,round:S.round},
+    usuallyPractises:LOCS[S.loc].name,
+    areas,
+    sessionsLast7Days:S.log.filter(l=>l.t>now-7*DAY_MS).length,
+    totalSessions:S.log.length,
+    checkins:S.log.filter(l=>l.feel||l.shaky).slice(-12).map(l=>({date:iso(l.t),session:l.kind,feel:l.feel||null,shakiest:l.shaky||null})),
+    currentDifficulty:S.load,
+    goals:S.goals,
+    drills:Object.values(DR).map(d=>({id:d.id,name:d.name,area:d.area,stage:d.stage,where:d.loc}))
+  };
+  return `You are the golf practice coach inside Range Golf. It builds practice sessions from four skills tests (putting, wedges, irons, driver; each scored out of 100, where 25 needs work and 100 is strong) and from check-ins after each session. Review this golfer's data and set adjustments for their next 7 days.
+
+Rules:
+- Base everything on the data below. Don't invent results or sessions. Untested areas have a null score.
+- difficulty is an integer from -2 (more technique drills) to 2 (more pressure games and scoring). Move it by at most 1 from currentDifficulty, using the recent check-ins.
+- stage: the kind of drill to lean on next week: "tech", "control" or "pressure".
+- goals are areas the golfer chose to work on. Keep them in focus.
+- focus: 1 or 2 area ids to prioritise (putt, wedge, iron, driver).
+- favour and avoid: up to 4 drill ids each, only from the drills list, and only drills they can do where they usually practise.
+- summary: 2 or 3 short sentences to the golfer, in UK English, warm and specific: what's going well and what next week works on. If an area is untested, suggest testing it.
+- tips: up to 3 short practical tips, under 20 words each.
+
+Reply with only JSON in exactly this shape:
+{"summary":"...","focus":["putt"],"stage":"control","difficulty":0,"favour":["ladder"],"avoid":[],"tips":["..."]}
+
+Data:
+${JSON.stringify(data)}`;
+}
+async function runCoach(){
+  if(!COACH.fn||COACH.busy)return;
+  COACH.busy=true;COACH.err="";COACH.ctl=new AbortController();renderToday();renderProgress();
+  try{
+    const r=await COACH.fn.json(coachPrompt(),{signal:COACH.ctl.signal,cache:false});
+    if(!r||typeof r!=="object"||Array.isArray(r))throw {code:"invalid_json"};
+    const c=cleanCoach({t:Date.now(),summary:r.summary,focus:r.focus,stage:r.stage,load:r.difficulty,favour:r.favour,avoid:r.avoid,tips:r.tips,prevLoad:S.load});
+    if(!c.summary)throw {code:"invalid_json"};
+    S.coach=c;S.load=c.load;save();
+  }catch(e){
+    const code=e&&e.code;
+    if(code==="cancelled"){}
+    else if(["not_granted","sampling_disabled","not_declared","capability_disabled","capability_removed"].includes(code))COACH.fn=null;
+    else if(code==="rate_limited")COACH.err="Claude is busy or you've reached your usage limit. Try again later.";
+    else if(code==="session_expired")COACH.err="Sign in to Claude again, then try the review.";
+    else COACH.err="Couldn't get a review just now. Try again in a moment.";
+  }finally{COACH.busy=false;COACH.ctl=null;renderAll();}
+}
+function coachCard(){
+  const c=coachOn()?S.coach:null;
+  if(!COACH.fn&&!c)return "";
+  let h=`<section class="card coach"><p class="coach-badge">${ICON.coach}Coach review</p>`;
+  if(COACH.busy)return h+`<p class="c-busy">Claude is looking at your scores and check-ins…</p><div class="btn-row"><button type="button" class="btn" data-act="coachstop">Stop</button></div></section>`;
+  if(c){
+    h+=`<p class="c-sum">${esc(c.summary)}</p>`;
+    if(c.tips.length)h+=`<ul>${c.tips.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
+    const bits=[];
+    if(c.focus.length)bits.push("focus on "+listAreas(c.focus));
+    if(c.stage)bits.push({tech:"more technique drills",control:"more distance-control drills",pressure:"more pressure games"}[c.stage]);
+    if(c.favour.length)bits.push("more "+c.favour.map(i=>DR[i].name).join(", "));
+    if(c.avoid.length)bits.push("a break from "+c.avoid.map(i=>DR[i].name).join(", "));
+    h+=`<p class="c-applied">Applied until ${new Date(c.until).toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"short"})}${bits.length?": "+esc(bits.join("; "))+".":"."}</p>`;
+    h+=`<div class="btn-row">${COACH.fn?`<button type="button" class="btn" data-act="coach">Ask again</button>`:""}<button type="button" class="btn" data-act="coachundo">Undo changes</button></div>`;
+  }else{
+    h+=`<p class="c-sum">Let Claude look at your test scores and how your practice has gone, then adjust the next 7 days for you.</p>`;
+    if(COACH.err)h+=`<p class="warn-note">${esc(COACH.err)}</p>`;
+    h+=`<button type="button" class="btn primary" data-act="coach">Review my progress</button><p class="fine">Uses your own Claude account. Claude asks you to allow it the first time.</p>`;
+  }
+  return h+"</section>";
+}
+async function initCoach(){
+  if(!window.claude||typeof window.claude.use!=="function")return;
+  try{COACH.fn=await window.claude.use("sample");}catch(e){COACH.fn=null;}
+  if(COACH.fn){renderToday();renderProgress();}
+}
+
+function closePlayer(){
+  P.open=false;anims.delete(plAnim);hush();releaseWake();
+  el.player.hidden=true;document.body.style.overflow="";
+  if(P.done&&P.sess.kind==="plan")selDay=nextSession()||P.sess.n;
+  renderAll();
+}
+el.plPlay.addEventListener("click",togglePause);
+el.plReady.addEventListener("click",()=>{if(P.phases[P.i].type==="prep")jump(P.i+1);});
+el.plNext.addEventListener("click",()=>{const j=prepOf(P.phases[P.i].idx+1);if(j<0)finish();else jump(j);});
+el.plPrev.addEventListener("click",()=>{
+  const ph=P.phases[P.i],cur=prepOf(ph.idx),now=performance.now();
+  if(P.i===cur&&now-P.t0<3000&&ph.idx>0)jump(prepOf(ph.idx-1));else jump(cur);
+});
+function howNow(){if(!P.paused)togglePause();openSheet(P.phases[P.i].d.id);}
+el.plHow.addEventListener("click",howNow);
+el.plName.addEventListener("click",howNow);
+el.plClose.addEventListener("click",()=>{if(P.done){closePlayer();return;}el.endBar.hidden=false;if(!P.paused)togglePause();el.endNo.focus();});
+el.endNo.addEventListener("click",()=>{el.endBar.hidden=true;if(P.paused)togglePause();});
+el.endYes.addEventListener("click",closePlayer);
+el.dnBack.addEventListener("click",closePlayer);
+el.dnRetest.addEventListener("click",()=>{closePlayer();startTest();});
+el.plYT.addEventListener("click",e=>{
+  if(!P.paused&&!P.done)togglePause();
+  const d=P.phases&&P.phases[P.i]&&P.phases[P.i].d;
+  if(EMBED&&d&&d.vid){e.preventDefault();openSheet(d.id,{video:true});}
+});
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&P.open&&!P.done&&!P.paused)togglePause();});
+
+/* ---------- Accounts ---------- */
+function renderBrand(){
+  const tag=$("brandTag"),me=ACC.me;
+  if(!me||!me.id)return;
+  tag.textContent="";tag.className="who";
+  const img=document.createElement("img");img.className="avatar";img.alt="";img.src=me.avatarUrl;
+  const sp=document.createElement("span");sp.textContent=me.name||"Signed in";
+  tag.append(img,sp);
+}
+function applyRemote(data){
+  if(ACC.writing||ACC.pending)return;
+  const before=JSON.stringify(serial());
+  S=normalize(data);
+  if(JSON.stringify(serial())!==before){if(isDone(selDay)&&!P.open)selDay=nextSession()||selDay;renderAll();}
+}
+async function initAccount(){
+  if(!window.claude||typeof window.claude.use!=="function")return;
+  let user=null,db=null;
+  try{[user,db]=await Promise.all([window.claude.use("user"),window.claude.use("db")]);}catch(e){return;}
+  if(!user)return;
+  let me=null;try{me=await user.me();}catch(e){return;}
+  ACC.user=user;ACC.me=me;ACC.owner=!!me.isOwner;
+  renderBrand();
+  if(!db||!me.id){renderAll();return;}
+  ACC.uid=me.id;ACC.ref=db.doc("golfers/"+me.id);
+  let snap=null;
+  try{snap=await ACC.ref.get();}catch(e){renderAll();return;}
+  ACC.mode="account";
+  if(snap.exists)S=normalize(snap.data());
+  else{
+    let claimed=null;try{claimed=localStorage.getItem(KEY+"-account");}catch(e){}
+    const hasLocal=S.tests.length||S.log.length||Object.keys(S.done).length;
+    if(hasLocal&&(!claimed||claimed===me.id)){try{localStorage.setItem(KEY+"-account",me.id);}catch(e){}queueWrite();}
+    else{const keep={voice:S.voice,sound:S.sound,vname:S.vname,rate:S.rate,detail:S.detail};S=Object.assign(normalize({}),keep);}
+  }
+  selDay=nextSession()||SESSIONS;
+  ACC.ref.onSnapshot(s2=>{if(s2.exists&&!s2.metadata.hasPendingWrites&&!s2.metadata.fromCache)applyRemote(s2.data());},()=>{});
+  renderAll();
+}
+
+/* ---------- Boot ---------- */
+$("lockup").innerHTML=markSVG()+wordmarkSVG()+'<span class="golf-tag">GOLF</span>';
+$("dnMark").innerHTML=markSVG();
+renderAll();
+const h0=(location.hash||"").slice(1);
+go(["today","plan","library","progress"].includes(h0)?h0:"today",true);
+requestAnimationFrame(frame);
+initAccount();
+initCoach();
+})();
+</script>
+
+</body>
+</html>
